@@ -11,6 +11,12 @@
 #define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.143 green:0.673 blue:0.620 alpha:1.000]
 #define THEME_COLOR_NORMAL_OBJ [UIColor colorWithWhite:0.530 alpha:1.000]
 
+#define SELF_SIZE_WIDTH self.view.frame.size.width
+#define SELF_SIZE_HEIGHT self.view.frame.size.height
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 
 @interface MacroDefine : NSObject
 
