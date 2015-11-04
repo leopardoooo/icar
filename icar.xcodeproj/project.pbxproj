@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C078AC2A1BE9DE6D00989F2A /* MyPrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C078AC291BE9DE6D00989F2A /* MyPrivateViewController.m */; };
 		C0EBC9721BE89CEE00AADDD3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EBC9711BE89CEE00AADDD3 /* main.m */; };
 		C0EBC9751BE89CEE00AADDD3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EBC9741BE89CEE00AADDD3 /* AppDelegate.m */; };
 		C0EBC9781BE89CEE00AADDD3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EBC9771BE89CEE00AADDD3 /* ViewController.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C078AC281BE9DE6D00989F2A /* MyPrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPrivateViewController.h; sourceTree = "<group>"; };
+		C078AC291BE9DE6D00989F2A /* MyPrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPrivateViewController.m; sourceTree = "<group>"; };
 		C0EBC96C1BE89CEE00AADDD3 /* icar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = icar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0EBC9701BE89CEE00AADDD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0EBC9711BE89CEE00AADDD3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -89,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C078AC271BE9DE3000989F2A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				C078AC281BE9DE6D00989F2A /* MyPrivateViewController.h */,
+				C078AC291BE9DE6D00989F2A /* MyPrivateViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
 		C0EBC9631BE89CEE00AADDD3 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 		C0EBC99B1BE89E3B00AADDD3 /* my */ = {
 			isa = PBXGroup;
 			children = (
+				C078AC271BE9DE3000989F2A /* controller */,
 			);
 			name = my;
 			sourceTree = "<group>";
@@ -362,6 +375,7 @@
 				C0EBC9BC1BE9B18100AADDD3 /* AppNavigationController.m in Sources */,
 				C0EBC9B51BE8AF1900AADDD3 /* AppTabBarController.m in Sources */,
 				C0EBC9B91BE8B54800AADDD3 /* MacroDefine.m in Sources */,
+				C078AC2A1BE9DE6D00989F2A /* MyPrivateViewController.m in Sources */,
 				C0EBC9751BE89CEE00AADDD3 /* AppDelegate.m in Sources */,
 				C0EBC9721BE89CEE00AADDD3 /* main.m in Sources */,
 			);

@@ -105,7 +105,7 @@
         <!--我的-->
         <scene sceneID="JHr-bX-ghW">
             <objects>
-                <viewController title="我的" id="cvm-GZ-CRb" sceneMemberID="viewController">
+                <viewController title="我的" id="cvm-GZ-CRb" customClass="MyPrivateViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9k8-2r-gip"/>
                         <viewControllerLayoutGuide type="bottom" id="gZw-Av-QLE"/>
