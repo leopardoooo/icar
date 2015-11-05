@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class JLCarouselView;
+
 @interface HomeViewController : UIViewController
 
 @property(nonatomic, strong) UILabel *posLabel;
 @property(nonatomic, strong) UIImageView *posImageView;
+@property(nonatomic, strong) JLCarouselView *carouselView;
 
 @end

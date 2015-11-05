@@ -10,6 +10,9 @@
 #import "MacroDefine.h"
 #import "SwitchPositionView.h"
 #import "SearchViewController.h"
+#import "JLCarouselView.h"
+
+// 宏定义
 #define NAV_SIZE self.navigationController.navigationBar.frame.size
 
 @interface HomeViewController (){
@@ -22,11 +25,16 @@
 
 @end
 
+
+/**
+ *  首页控制器，这是整个页面布局的组装控制器，可能不包含具体UI的实现
+ */
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeAll;
+    [self initAndAddCarouselView];
     
     // 重写导航条
     UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 12, NAV_SIZE.width, NAV_SIZE.height - 12)];
@@ -44,9 +52,27 @@
     [_barSearchView addGestureRecognizer:tabRecognizer];
     
     // 创建地理位置选择视图
-    _switchPositionView = [[SwitchPositionView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, SCREEN_HEIGHT)];
+    _switchPositionView = [[SwitchPositionView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, SCREEN_HEIGHT) withParent:self];
     [self.view addSubview: _switchPositionView];
     //[[UIApplication sharedApplication].keyWindow addSubview:_switchPositionView];
+}
+
+-(void)initAndAddCarouselView{
+    self.carouselView = [[JLCarouselView alloc]initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 160) withPages:5];
+    
+    // 添加广告页
+//FIXME: 需要修改成异步加载，不然影响效率，推荐SDImageXXX第三方
+    NSArray *ads = @[@"http://img.tqmall.com/config/2015/07/10/143649893449_web.jpg",@"http://img.tqmall.com/config/2015/07/20/143737134574_web.jpg",@"http://img.tqmall.com/config/2015/09/29/144351121430_web.jpg",@"http://img.tqmall.com/config/2015/10/22/144547593086_web.jpg",@"http://img.tqmall.com/config/2015/08/11/143925567550_web.jpg"];
+
+    for (int i = 0 ; i < ads.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.carouselView.frame.size.width * i, 0, self.carouselView.frame.size.width, self.carouselView.frame.size.height)];        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:ads[i]]];
+        UIImage *image = [[UIImage alloc] initWithData:data];
+        [imageView setImage:image];
+        [self.carouselView addToScrollView:imageView];
+    }
+    
+    [self.view addSubview:self.carouselView];
 }
 
 -(void)clickSearchView:(UITapGestureRecognizer *) rec{
@@ -56,7 +82,7 @@
 
 #pragma mark 创建导航视图
 -(UIView *) createRightTools{
-    int w = 85, y = 5, imgw = 20, imgh = 20 , padding = 15;
+    int w = 85, y = 7, imgw = 20, imgh = 20 , padding = 15;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(NAV_SIZE.width - w, y, w, imgh)];
     
     UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -132,6 +158,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.barTintColor = THEME_COLOR_HIGHLIGHTED_OBJ;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [super viewWillAppear:animated];
+    
+    // 5秒轮播一次
+    [self.carouselView startTimer:5];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    // 停止轮播
+    [self.carouselView stopTimer];
 }
 
 /*

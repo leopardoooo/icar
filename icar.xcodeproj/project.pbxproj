@@ -12,6 +12,7 @@
 		C05FEED41BEAEFEB007F841C /* icon_homepage_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C05FEECF1BEAEFEB007F841C /* icon_homepage_message@2x.png */; };
 		C05FEED51BEAEFEB007F841C /* icon_homepage_downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C05FEED01BEAEFEB007F841C /* icon_homepage_downArrow@2x.png */; };
 		C05FEED61BEAEFEB007F841C /* icon_homepage_search.png in Resources */ = {isa = PBXBuildFile; fileRef = C05FEED11BEAEFEB007F841C /* icon_homepage_search.png */; };
+		C05FEEDA1BEB06B8007F841C /* JLCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = C05FEED91BEB06B8007F841C /* JLCarouselView.m */; };
 		C078AC2A1BE9DE6D00989F2A /* MyPrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C078AC291BE9DE6D00989F2A /* MyPrivateViewController.m */; };
 		C078AC2D1BE9E3EF00989F2A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C078AC2C1BE9E3EF00989F2A /* HomeViewController.m */; };
 		C078AC3E1BE9F9E400989F2A /* SwitchPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C078AC3D1BE9F9E400989F2A /* SwitchPositionView.m */; };
@@ -55,6 +56,8 @@
 		C05FEECF1BEAEFEB007F841C /* icon_homepage_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homepage_message@2x.png"; sourceTree = "<group>"; };
 		C05FEED01BEAEFEB007F841C /* icon_homepage_downArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homepage_downArrow@2x.png"; sourceTree = "<group>"; };
 		C05FEED11BEAEFEB007F841C /* icon_homepage_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_homepage_search.png; sourceTree = "<group>"; };
+		C05FEED81BEB06B8007F841C /* JLCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCarouselView.h; sourceTree = "<group>"; };
+		C05FEED91BEB06B8007F841C /* JLCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCarouselView.m; sourceTree = "<group>"; };
 		C078AC281BE9DE6D00989F2A /* MyPrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPrivateViewController.h; sourceTree = "<group>"; };
 		C078AC291BE9DE6D00989F2A /* MyPrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPrivateViewController.m; sourceTree = "<group>"; };
 		C078AC2B1BE9E3EF00989F2A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -114,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C05FEED71BEB068D007F841C /* julun */ = {
+			isa = PBXGroup;
+			children = (
+				C05FEED81BEB06B8007F841C /* JLCarouselView.h */,
+				C05FEED91BEB06B8007F841C /* JLCarouselView.m */,
+			);
+			path = julun;
+			sourceTree = "<group>";
+		};
 		C078AC271BE9DE3000989F2A /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +253,7 @@
 		C0EBC9971BE89D9000AADDD3 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				C05FEED71BEB068D007F841C /* julun */,
 			);
 			name = libs;
 			path = icar/libs;
@@ -454,6 +467,7 @@
 				C0EBC9751BE89CEE00AADDD3 /* AppDelegate.m in Sources */,
 				C078AC4A1BEA563A00989F2A /* SearchViewController.m in Sources */,
 				C0EBC9721BE89CEE00AADDD3 /* main.m in Sources */,
+				C05FEEDA1BEB06B8007F841C /* JLCarouselView.m in Sources */,
 				C078AC2D1BE9E3EF00989F2A /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,11 +8,17 @@
 
 #import "ModelWindowView.h"
 
+@interface ModelWindowView (){
+}
+
+@end
+
+
 @implementation ModelWindowView
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
-        self.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.500];
+        self.backgroundColor = [UIColor colorWithWhite:0.000 alpha:.5];
         self.alpha = 0;
     }
         
@@ -35,7 +41,7 @@
 }
 -(void)show:(float)duration{
     [UIView animateWithDuration:duration animations:^{
-        self.alpha = 0.5;
+        self.alpha = 1;
     }];
     self.showState = YES;
 }

@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ModelWindowView.h"
 
+@class HomeViewController;
+
 @interface SwitchPositionView : ModelWindowView
+
+
+-(instancetype) initWithFrame:(CGRect)frame withParent: (HomeViewController *) homeVC;
 
 @end
