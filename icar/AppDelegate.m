@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MacroDefine.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,15 @@
     // Override point for customization after application launch.
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    // 隐藏返回图标的文字
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1300, 0) forBarMetrics:UIBarMetricsDefault];
+    
+    // 设置返回图标
+//    [UINavigationBar appearance].backIndicatorImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    
+    [UINavigationBar appearance].tintColor = [UIColor colorWithWhite:0.167 alpha:1.000];
     
     return YES;
 }

@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+// 默认高亮的字体颜色
 #define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.143 green:0.673 blue:0.620 alpha:1.000]
+// 默认的字体颜色
 #define THEME_COLOR_NORMAL_OBJ [UIColor colorWithWhite:0.530 alpha:1.000]
+// 默认的导航条背景颜色
+#define THEME_NAVBAR_DFAULT_TINTCOLOR_OBJ [UIColor colorWithWhite:0.968 alpha:1.000]
+// 默认的标题颜色，灰色系列
+#define THEME_DFAULT_TITLE_COLOR_OBJ [UIColor colorWithWhite:0.372 alpha:1.000]
 
 #define SELF_SIZE_WIDTH self.view.frame.size.width
 #define SELF_SIZE_HEIGHT self.view.frame.size.height

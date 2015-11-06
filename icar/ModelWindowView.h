@@ -21,4 +21,7 @@
 -(void)show;
 -(void)show:(float) duration;
 
+-(void)toggle;
+-(void)toggle:(float) duration;
+
 @end

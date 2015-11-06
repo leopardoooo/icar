@@ -9,8 +9,6 @@
 #import "JLCarouselView.h"
 
 @interface JLCarouselView () <UIScrollViewDelegate>{
-    UIScrollView * _scrollView;
-    UIPageControl * _pageControl;
     NSInteger _pages;
     NSTimer * _timer;
 }
@@ -44,7 +42,6 @@
     
     int height = 16, padding = 10, width = 80;
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((bodyWidth - width)/2, bodyHeight - height - padding, width, height)];
-    _pageControl.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.1];
     _pageControl.layer.cornerRadius = 4;
     _pageControl.numberOfPages = _pages;
     _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
@@ -82,7 +79,7 @@
     if(!_timer){
         _timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(playNextView) userInfo:nil repeats:YES];
     }else{
-        [_timer setFireDate:[NSDate distantPast]];
+        [_timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
     }
     
 }

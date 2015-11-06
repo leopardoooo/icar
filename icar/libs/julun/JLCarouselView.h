@@ -14,6 +14,8 @@
 
 @interface JLCarouselView : UIView
 
+@property(nonatomic,strong) UIScrollView * scrollView;
+@property(nonatomic,strong) UIPageControl * pageControl;
 
 -(instancetype) initWithFrame:(CGRect)frame withPages:(NSInteger ) pages;
 

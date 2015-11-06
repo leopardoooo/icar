@@ -33,7 +33,7 @@
 
 -(void)createModelWindow{
     _bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
-    _bodyView.backgroundColor = [UIColor colorWithWhite:0.950 alpha:1.000];
+    _bodyView.backgroundColor = [UIColor colorWithWhite:0.950 alpha:.9];
     _bodyView.layer.masksToBounds = YES;
     _bodyView.layer.cornerRadius = 2;
     
@@ -98,17 +98,23 @@
 }
 
 -(void)hide:(float)duration{
-    [UIView animateWithDuration:duration animations:^{
-        [self setBodyFrame:0];
-    }];
-    [super hide:duration];
+    if(self.showState){
+        [UIView animateWithDuration:duration animations:^{
+            [self setBodyFrame:0];
+        }];
+        [super hide:duration];
+        [_homeVC.posImageView setHighlighted:NO];
+    }
 }
 
 -(void)show:(float)duration{
-    [UIView animateWithDuration:duration animations:^{
-        [self setBodyFrame:200];
-    }];
-    [super show:duration];
+    if(!self.showState){
+        [UIView animateWithDuration:duration animations:^{
+            [self setBodyFrame:200];
+        }];
+        [super show:duration];
+        [_homeVC.posImageView setHighlighted:YES];
+    }
 }
 -(void)setBodyFrame:(float) height{
      _bodyView.frame = CGRectMake(5, 5, self.frame.size.width - 10, height);

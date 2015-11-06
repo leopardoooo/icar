@@ -11,6 +11,7 @@
 #import "SwitchPositionView.h"
 #import "SearchViewController.h"
 #import "JLCarouselView.h"
+#import "AppNavigationController.h"
 
 // 宏定义
 #define NAV_SIZE self.navigationController.navigationBar.frame.size
@@ -59,7 +60,7 @@
 
 -(void)initAndAddCarouselView{
     self.carouselView = [[JLCarouselView alloc]initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 160) withPages:5];
-    
+    self.carouselView.pageControl.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.1];
     // 添加广告页
 //FIXME: 需要修改成异步加载，不然影响效率，推荐SDImageXXX第三方
     NSArray *ads = @[@"http://img.tqmall.com/config/2015/07/10/143649893449_web.jpg",@"http://img.tqmall.com/config/2015/07/20/143737134574_web.jpg",@"http://img.tqmall.com/config/2015/09/29/144351121430_web.jpg",@"http://img.tqmall.com/config/2015/10/22/144547593086_web.jpg",@"http://img.tqmall.com/config/2015/08/11/143925567550_web.jpg"];
@@ -148,11 +149,7 @@
 }
 
 -(void) toggleInPostion: (UITapGestureRecognizer *)recognizer{
-    if(_switchPositionView.showState == NO){
-        [_switchPositionView show];
-    }else{
-        [_switchPositionView hide];
-    }
+    [_switchPositionView toggle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -172,7 +169,11 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
+    AppNavigationController *nav = (AppNavigationController *)self.navigationController;
+    [nav resetAppBarStyle];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [_switchPositionView hide];
+    
     // 停止轮播
     [self.carouselView stopTimer];
 }

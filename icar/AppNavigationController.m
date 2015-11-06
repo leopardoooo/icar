@@ -7,6 +7,7 @@
 //
 
 #import "AppNavigationController.h"
+#import "MacroDefine.h"
 
 @interface AppNavigationController ()
 
@@ -17,9 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.navigationBar.translucent = NO;
-    
+    [self resetAppBarStyle];
+}
+
+-(void)resetAppBarStyle{
+    self.navigationBar.barTintColor = THEME_NAVBAR_DFAULT_TINTCOLOR_OBJ;
 }
 
 - (void)didReceiveMemoryWarning {

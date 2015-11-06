@@ -30,20 +30,35 @@
     [self hide:0.3];
 }
 -(void)hide: (float) duration{
-    [UIView animateWithDuration:duration animations:^{
-        self.alpha = 0;
-    }];
-    self.showState = NO;
+    if(self.showState){
+        [UIView animateWithDuration:duration animations:^{
+            self.alpha = 0;
+        }];
+        self.showState = NO;
+    }
 }
 
 -(void)show{
     [self show:0.3];
 }
 -(void)show:(float)duration{
-    [UIView animateWithDuration:duration animations:^{
-        self.alpha = 1;
-    }];
-    self.showState = YES;
+    if(!self.showState){
+        [UIView animateWithDuration:duration animations:^{
+            self.alpha = 1;
+        }];
+        self.showState = YES;
+    }
+}
+
+-(void)toggle{
+    [self toggle:0.3];
+}
+-(void)toggle:(float) duration{
+    if(_showState == NO){
+        [self show];
+    }else{
+        [self hide];
+    }
 }
 
 #pragma mark 触摸屏幕到当前视图隐藏当前视图
