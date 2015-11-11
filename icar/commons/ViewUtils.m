@@ -24,5 +24,28 @@
     return btn;
 }
 
++(void)view: (UIView *) target radius: (CGFloat) width{
+    if(target){
+        target.layer.masksToBounds = YES;
+        target.layer.cornerRadius = width;
+    }
+}
+
++(void)view: (UIView *) target shadowColor: (UIColor *) color offset: (CGSize) size opacity: (float) opacity radius: (float) radius{
+    if(target){
+        [target.layer setShadowColor: color.CGColor];
+        [target.layer setShadowOffset: size];
+        [target.layer setShadowRadius:radius];
+        [target.layer setShadowOpacity:opacity];
+    }
+}
+
++(UIView *)createSplitLineView: (CGRect)frame color: (UIColor *) color{
+    UIView *line = [[UIView alloc]initWithFrame:frame];
+    line.backgroundColor = color;
+    
+    return line;
+}
+
 @end
 

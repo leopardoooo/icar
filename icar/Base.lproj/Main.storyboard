@@ -68,7 +68,7 @@
         <!--配件中心-->
         <scene sceneID="1gW-8U-IRJ">
             <objects>
-                <viewController title="配件中心" id="6Lj-b0-3ZN" sceneMemberID="viewController">
+                <viewController title="配件中心" id="6Lj-b0-3ZN" customClass="ProductViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rKc-og-LD4"/>
                         <viewControllerLayoutGuide type="bottom" id="ank-xZ-uvA"/>
@@ -76,7 +76,6 @@
                     <view key="view" contentMode="scaleToFill" id="u2h-Sz-vW3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1688341525" green="0.66416114270000004" blue="0.01012211801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="hPb-eI-7BX"/>
                 </viewController>

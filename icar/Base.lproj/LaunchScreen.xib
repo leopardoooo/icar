@@ -11,29 +11,30 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  Copyright (c) 2015年 杭州聚轮网络科技有限公司. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 聚轮网络" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="160" y="435.5" width="161.5" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="Hog-gD-Li0">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
-                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iCar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rf7-MA-Sq7">
+                    <rect key="frame" x="193" y="140" width="71" height="49"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Hog-gD-Li0" secondAttribute="bottom" id="Fpm-vw-NLU"/>
-                <constraint firstItem="Hog-gD-Li0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bG3-9K-XS6"/>
-                <constraint firstAttribute="trailing" secondItem="Hog-gD-Li0" secondAttribute="trailing" id="bOY-2O-oF0"/>
-                <constraint firstItem="Hog-gD-Li0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hWu-V5-rel"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="30" id="FMB-sB-eIw"/>
+                <constraint firstAttribute="centerX" secondItem="rf7-MA-Sq7" secondAttribute="centerX" constant="11" id="QSf-3w-7o8"/>
+                <constraint firstItem="rf7-MA-Sq7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="140" id="Z6F-cf-AsA"/>
+                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" constant="-0.5" id="zUT-Nw-wcU"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
-    <resources>
-        <image name="Default" width="320" height="480"/>
-    </resources>
 </document>

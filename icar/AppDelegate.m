@@ -19,16 +19,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
     // 隐藏返回图标的文字
-//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1300, 0) forBarMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1300, 0) forBarMetrics:UIBarMetricsDefault];
     
     // 设置返回图标
-//    [UINavigationBar appearance].backIndicatorImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    
+    [UINavigationBar appearance].backIndicatorImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//
     [UINavigationBar appearance].tintColor = [UIColor colorWithWhite:0.167 alpha:1.000];
+    UIFont *font = [UIFont systemFontOfSize:13];
+    [UIButton appearance].titleLabel.font = font;
+    [UILabel appearance].font = font;
+    [UITextView appearance].font = font;
+    [UITextField appearance].font = font;
+    
+    // FIXME: 默认激活配件中心，方便开发，后期需要修改滴
+    UITabBarController * tab = (UITabBarController *) _window.rootViewController;
+    [tab setSelectedIndex:1];
     
     return YES;
 }
