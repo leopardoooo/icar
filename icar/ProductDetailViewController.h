@@ -13,6 +13,8 @@
 
 @interface ProductDetailViewController : UIViewController
 
++(void)openProductDetailViewController: (UIViewController *) target withProduct: (ProductResultModel *) prm;
+
 -(instancetype)initWithProduct: (ProductResultModel *) prm;
 
 @end

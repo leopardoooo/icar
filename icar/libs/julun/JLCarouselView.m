@@ -38,6 +38,7 @@
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.delegate = self;
+    _scrollView.bounces = NO;
     _scrollView.contentSize = CGSizeMake(bodyWidth * _pages, bodyHeight);
     
     int height = 16, padding = 10, width = 80;

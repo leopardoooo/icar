@@ -15,21 +15,41 @@
 #import "MixedUtils.h"
 #import "ProdSpecTableView.h"
 #import "ProdEvaluationView.h"
+#import "FiveStarRatingView.h"
+#import "ImageBrowserViewController.h"
+#import "ProductBuyBarView.h"
+#import "SplitLineLabelView.h"
+#import "SimpleWebView.h"
 
 @interface ProductDetailViewController (){
     ProductResultModel * _product;
-    
-    ProdSpecTableView *_specTableView;
+    ProdSpecTableView * _specTableView;
+    ProductBuyBarView * _buyBarView;
+    ProdEvaluationView *_evaluationView;
+    UIButton *_collectBtn;
+    UIButton *_shareBtn;
+    UIScrollView *_rootView;
+    BOOL _collectMark;
 }
 
 @end
 
 @implementation ProductDetailViewController
 
+/* 打开一个产品详情控制器，应该都通过这个静态方法打开，因为该方法除了实例化一个控制器, 还会隐藏底部TabBar
+ */
++(void)openProductDetailViewController: (UIViewController *) target withProduct: (ProductResultModel *) prm{
+    target.hidesBottomBarWhenPushed = YES;
+    ProductDetailViewController *vc = [[ProductDetailViewController alloc] initWithProduct:prm];
+    [target.navigationController pushViewController:vc animated:YES];
+    target.hidesBottomBarWhenPushed = NO;
+}
+
 // 初始化当前类必须要一个产品数据
 -(instancetype)initWithProduct: (ProductResultModel *) prm{
     if(self = [super init]){
         _product = prm;
+        _collectMark = [MixedUtils getRandomNumber:0 to:1];
     }
     return self;
 }
@@ -37,11 +57,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIScrollView *root = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    root.contentSize = CGSizeMake(SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT * 2);
-    self.view = root;
+    _rootView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT - APP_STATUSBAR_SIZE.height - SELF_NAVBAR.frame.size.height - 45)];
+    _rootView.contentSize = CGSizeMake(SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT * 3);
+    [self.view addSubview:_rootView];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0.972 alpha:1.000];
+    _rootView.backgroundColor = [UIColor colorWithWhite:0.972 alpha:1.000];
     self.title = @"商品详情";
     
     [self createRightTools];
@@ -52,41 +72,54 @@
     prodView.backgroundColor = [UIColor whiteColor];
     [self createTitleAndIcon:prodView];
     [self createPriceInfo:prodView];
-    [self.view addSubview:prodView];
+    [_rootView addSubview:prodView];
     
     [prodView addBottomBorderWithColor:THEME_COLOR_BORDER_OBJ andWidth:.5];
     
     // 动态listView
     _specTableView = [[ProdSpecTableView alloc] initWithFrame:CGRectMake(0, 428, SELF_SIZE_WIDTH, 70)];
-    [self.view addSubview:_specTableView];
+    [_rootView addSubview:_specTableView];
     
     // 商品评价
-    ProdEvaluationView *evaluationView = [[ProdEvaluationView alloc]initWithPosy:510];
-    [self.view addSubview:evaluationView];
+    _evaluationView = [[ProdEvaluationView alloc]initWithPosy:510 withParent:self];
+    [_rootView addSubview:_evaluationView];
     
+    // 图文详情
+    SplitLineLabelView *lineView = [[SplitLineLabelView alloc] initWithFrame:CGRectMake(15, 510 + 660, SELF_SIZE_WIDTH - 30, 40) withTitle:@"继续拖动，查看图文详情" bgColor: _rootView.backgroundColor lineColor:[UIColor colorWithWhite:0.776 alpha:1.000] titleColor:[UIColor colorWithWhite:0.208 alpha:1.000]];
+    [_rootView addSubview:lineView];
+    
+    // WebView
+    SimpleWebView *webView = [[SimpleWebView alloc]initWithFrame:CGRectMake(0, 510 + 660 + 40, SELF_SIZE_WIDTH, 10)];
+    [_rootView addSubview:webView];
+    [webView loadRequestWithString:@"http://h5.m.jd.com/active/download/download.html?source=RankingMain"];
+    
+    // 底部购买栏
+    _buyBarView = [[ProductBuyBarView alloc] initWithParent:self withProduct:_product];
+    [self.view addSubview:_buyBarView];
 }
 
 // 创建导航栏右边按钮
 -(void)createRightTools{
     UIView *toolsView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
     
-    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareBtn setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-    shareBtn.frame = CGRectMake(0, 5, 20, 20);
+    _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_shareBtn setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+    _shareBtn.frame = CGRectMake(0, 5, 20, 20);
     
-    UIButton *collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [collectBtn setImage:[UIImage imageNamed:@"icon_collect"] forState:UIControlStateNormal];
-    collectBtn.frame = CGRectMake(40, 5, 20, 20);
+    _collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _collectBtn.frame = CGRectMake(40, 5, 20, 20);
+    [_collectBtn addTarget:self action:@selector(didCollectProd:) forControlEvents:UIControlEventTouchUpInside];
+    [self toggleCollectIcon];
     
-    [toolsView addSubview:shareBtn];
-    [toolsView addSubview:collectBtn];
+    [toolsView addSubview:_shareBtn];
+    [toolsView addSubview:_collectBtn];
     
     self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc] initWithCustomView:toolsView] ;
 }
 
 // 创建商品图片视图
 -(void)createProdScrollImage{
-    NSArray *imgArray = @[@"https://img.alicdn.com/bao/uploaded/i1/TB1A96uKpXXXXX4XXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i3/T1sgbmFCXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2CoWBgFXXXXXpXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2o3azgFXXXXXEXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2mpWmgFXXXXcXXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg"];
+    NSArray *imgArray = [self getScrollProdImages];
     JLCarouselView *imgCarouselView = [[JLCarouselView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 300) withPages:imgArray.count];
     imgCarouselView.pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0.910 alpha:0.900];
     int w = imgCarouselView.frame.size.width, h = imgCarouselView.frame.size.height;
@@ -95,15 +128,16 @@
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [UIImage imageWithData:data];
         
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(w * i, 0, w, h)];
-        [imgView setImage:img];
-        [imgCarouselView addToScrollView: imgView];
+        UIButton *btnView = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnView.frame = CGRectMake(w * i, 0, w, h);
+        [btnView addTarget:self action:@selector(openImageBrowser:) forControlEvents:UIControlEventTouchUpInside];
+        [btnView setImage:img forState:UIControlStateNormal];
+        [imgCarouselView addToScrollView: btnView];
     }
-    imgCarouselView.pageControl.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.015];
     imgCarouselView.pageControl.frame = CGRectMake(0, imgCarouselView.frame.size.height - 40, imgCarouselView.frame.size.width, 40);
     imgCarouselView.pageControl.layer.cornerRadius = 0;
     
-    [self.view addSubview:imgCarouselView];
+    [_rootView addSubview:imgCarouselView];
 }
 
 //创建标题
@@ -171,6 +205,35 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(NSArray *) getScrollProdImages{
+    NSArray *imgArray = @[@"https://img.alicdn.com/bao/uploaded/i1/TB1A96uKpXXXXX4XXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i3/T1sgbmFCXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2CoWBgFXXXXXpXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2o3azgFXXXXXEXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg",@"https://img.alicdn.com/imgextra/i1/1984719051/TB2mpWmgFXXXXcXXXXXXXXXXXXX_!!1984719051.jpg_430x430q90.jpg"];
+    
+    return imgArray;
+}
+
+-(void)openImageBrowser: (id) sender{
+    [ImageBrowserViewController openImageBrowser:self withUrls:[self getScrollProdImages] backHideBottom:YES ];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+#pragma mark 事件方法实现
+-(void)didCollectProd: (UIButton *)btn{
+    _collectMark = !_collectMark;
+    [self toggleCollectIcon];
+    [ViewUtils showMessage:_collectMark ? @"成功收藏":@"取消完成"];
+}
+// 根据当前的收藏标志设置显示图标
+-(void)toggleCollectIcon{
+    if(_collectMark){
+        [_collectBtn setImage:[UIImage imageNamed:@"iocn_merchant_collect_highlighted"] forState:UIControlStateNormal];
+    }else{
+        [_collectBtn setImage:[UIImage imageNamed:@"iocn_merchant_collect_normal"] forState:UIControlStateNormal];
+    }
 }
 
 @end

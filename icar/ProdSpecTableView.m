@@ -8,6 +8,7 @@
 
 #import "ProdSpecTableView.h"
 #import "MacroDefine.h"
+#import "ChooseProductView.h"
 
 @interface ProdSpecTableView ()<UITableViewDelegate, UITableViewDataSource>{
     NSArray * _dataArray;
@@ -50,10 +51,11 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellId = @"OrderSwitchTableViewCell";
+    NSString *cellId = @"ProdSpecTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.textLabel.textColor = THEME_COLOR_NORMAL_OBJ;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -64,9 +66,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"即将实现.." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    [self openChooseProductWindow];
+}
+
+-(void)openChooseProductWindow{
+    [ChooseProductView showChooseProductWindow];
 }
 
 /*

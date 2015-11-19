@@ -10,6 +10,6 @@
 
 @interface ProdEvaluationView : UIView
 
--(instancetype)initWithPosy:(CGFloat) posy;
+-(instancetype)initWithPosy:(CGFloat) posy withParent: (UIViewController *) parent;
 
 @end

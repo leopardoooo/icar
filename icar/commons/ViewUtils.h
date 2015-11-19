@@ -36,7 +36,14 @@
  */
 +(void)view: (UIView *) target shadowColor: (UIColor *) color offset: (CGSize) size opacity: (float) opacity radius: (float) radius;
 
-
+/* 创建一条分割线的视图，该接口其实没什么实际意义，可能方便以后统一扩展吧，暂且保留该接口方法  */
 +(UIView *)createSplitLineView: (CGRect)frame color: (UIColor *) color;
+
+/* 根据文本内容字体大小计算文本的高度和宽度  */
++(CGSize) sizeWithLines: (NSString *) labelText fontSize: (CGFloat) fontSize width: (CGFloat) width;
++(CGSize) sizeWithSingleLine: (NSString *) labelText fontSize: (CGFloat) fontSize;
+
+/* 自动消失的提示框 */
++(void)showMessage:(NSString *)message;
 
 @end

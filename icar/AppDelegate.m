@@ -35,7 +35,7 @@
     
     // FIXME: 默认激活配件中心，方便开发，后期需要修改滴
     UITabBarController * tab = (UITabBarController *) _window.rootViewController;
-    [tab setSelectedIndex:1];
+    [tab setSelectedIndex:2];
     
     return YES;
 }

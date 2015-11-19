@@ -58,10 +58,6 @@
     
     // 添加浮层
     [self createFilterOrderModelView];
-    
-    //FIXME: 这里为了方便开发，默认打开一个详情页面
-    ProductDetailViewController *detail = [[ProductDetailViewController alloc] initWithProduct:_dataArray[2]];
-    [self.navigationController pushViewController:detail animated:YES];
 }
 
 //
@@ -151,6 +147,8 @@
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.contentSize = CGSizeMake(SELF_SIZE_WIDTH * _tabLabelViews.count, SELF_SIZE_HEIGHT);
     _scrollView.delegate = self;
+    _scrollView.bounces = NO;
+    _scrollView.bouncesZoom = NO;
     [self.view addSubview:_scrollView];
     
     // 表格初始化

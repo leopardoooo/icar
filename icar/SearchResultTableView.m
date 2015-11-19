@@ -54,7 +54,11 @@
     SingleRowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if(!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:cellId owner:nil options:nil] lastObject];
+        // 将nib注册到tableView队列中
+        [tableView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellReuseIdentifier:cellId];
+        // 从队列中重新获取Cell
+        cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        
         cell.iconImageView.image = [UIImage imageNamed:@"icon_search_empty"];
         //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }

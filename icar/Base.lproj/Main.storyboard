@@ -132,9 +132,13 @@
                     <view key="view" contentMode="scaleToFill" id="J9a-eH-l2q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nbJ-fL-YK8"/>
+                    <navigationItem key="navigationItem" title="购物车" id="nbJ-fL-YK8">
+                        <barButtonItem key="rightBarButtonItem" title="编辑" style="plain" id="6Rt-m8-Xaf">
+                            <color key="tintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBF-Cg-Lav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

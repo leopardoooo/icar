@@ -7,6 +7,7 @@
 //
 
 #import "ViewUtils.h"
+#import "MacroDefine.h"
 
 @implementation ViewUtils
 
@@ -45,6 +46,52 @@
     line.backgroundColor = color;
     
     return line;
+}
+
+/**
+ *  单号文本的行高和宽度
+ */
++(CGSize) sizeWithSingleLine: (NSString *) labelText fontSize: (CGFloat) fontSize{
+    return [labelText sizeWithAttributes: @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+}
+
+/**
+ *  多行文本，求高度
+ */
++(CGSize) sizeWithLines: (NSString *) labelText fontSize: (CGFloat) fontSize width: (CGFloat) width{
+    NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:fontSize] };
+    return [labelText boundingRectWithSize:CGSizeMake(width, MAXFLOAT)  options: NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+
+/**
+ *  自动消失提示框
+ */
++(void)showMessage:(NSString *)message{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.frame = CGRectMake(1, 1, 1, 1);
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    
+    UILabel *label = [[UILabel alloc]init];
+    CGSize labelSize = [self sizeWithSingleLine:message fontSize:17];
+    label.frame = CGRectMake(10, 5, labelSize.width, labelSize.height);
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = 1;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    [showview addSubview:label];
+    CGRect rect=[[UIScreen mainScreen] bounds];
+    showview.frame = CGRectMake((rect.size.width - labelSize.width - 20)/2, rect.size.height - 100, labelSize.width+20, labelSize.height+10);
+    [UIView animateWithDuration:2.0 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
 }
 
 @end

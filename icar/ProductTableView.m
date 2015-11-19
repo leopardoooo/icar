@@ -71,7 +71,11 @@
     NSString *cellId = @"ProductTableViewCell";
     ProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:cellId owner:nil options:nil] lastObject];
+        // 将nib注册到tableView队列中
+        [tableView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellReuseIdentifier:cellId];
+        // 从队列中重新获取Cell
+        cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        
         cell.bigImageView.layer.masksToBounds = YES;
         cell.bigImageView.layer.cornerRadius = 2.0;
         cell.priceLabel.font = [UIFont systemFontOfSize:17];
@@ -101,11 +105,8 @@
 
 //点击进入详情页
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     ProductResultModel *prm = _dataArray[indexPath.row];
-    
-    ProductDetailViewController *detail = [[ProductDetailViewController alloc] initWithProduct:prm];
-    [_parent.navigationController pushViewController:detail animated:YES];
+    [ProductDetailViewController openProductDetailViewController:_parent withProduct:prm];
 }
 
 /*
