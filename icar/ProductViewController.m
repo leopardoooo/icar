@@ -165,48 +165,48 @@
 -(NSArray *)loadDataArray{
     NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     ProductResultModel *prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 205/55R16 91V CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/14/goods_img/20135_G_1394769479177.jpg";
+    prm.prodName = @"马牌 轮胎 205/55R16 91V CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/14/goods_img/20135_G_1394769479177.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"米其林 国产轮胎 韧悦 195/65R15 91V Energy XM2";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/11/12/goods_img/24796_P_1415773191025.jpg";
+    prm.prodName = @"米其林 国产轮胎 韧悦 195/65R15 91V Energy XM2";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/11/12/goods_img/24796_P_1415773191025.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"固特异 轮胎 配套大师 195/65R15 91V Eagle NCT5";
-    prm.img = @"http://img.tqmall.com/images/201510/goods_img/normal_p_144556842131682105.jpg";
+    prm.prodName = @"固特异 轮胎 配套大师 195/65R15 91V Eagle NCT5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/201510/goods_img/normal_p_144556842131682105.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"普利司通 轮胎 绿歌伴 205/55R16 91V EP200";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/08/11/goods_img/23574_G_1407759443009.jpg";
+    prm.prodName = @"普利司通 轮胎 绿歌伴 205/55R16 91V EP200";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/08/11/goods_img/23574_G_1407759443009.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
+    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
+    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
+    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
+    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
     [dataArray addObject:prm];
     
     prm = [[ProductResultModel alloc] init];
-    prm.title = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.img = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
+    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
+    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
     [dataArray addObject:prm];
     
     return dataArray;

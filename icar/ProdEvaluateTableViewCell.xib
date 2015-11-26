@@ -25,41 +25,43 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="李***海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abQ-FG-Xuo">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="李***海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abQ-FG-Xuo" userLabel="userNameLabel">
                         <rect key="frame" x="57" y="8" width="67" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qvw-3t-lm8" customClass="FiveStarRatingView">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qvw-3t-lm8" userLabel="fiveStarRatingView" customClass="FiveStarRatingView">
                         <rect key="frame" x="57" y="31" width="69" height="14"/>
                         <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_mine_level1.png" translatesAutoresizingMaskIntoConstraints="NO" id="g9o-Ln-hmr">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_mine_level1.png" translatesAutoresizingMaskIntoConstraints="NO" id="g9o-Ln-hmr" userLabel="userLevelImageView">
                         <rect key="frame" x="134" y="10" width="15" height="15"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015-11-10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuY-Ct-yNL">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015-11-10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuY-Ct-yNL" userLabel="commentDateLabel">
                         <rect key="frame" x="134" y="27" width="71" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="物流很快的，已经去指定的地点安装好了，只是感觉胎壁有点软薄，不过价格很便宜的、一分钱一分货，实体店里卖的佳通轮胎是280元一个，价格相差太大，质量问题等跑段时间再来追加评论吧。卖家的服务很好，安装的师傅也还不错，值得五星好评！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kyh-MQ-gez">
-                        <rect key="frame" x="8" y="48" width="298" height="50"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="物流很快的，已经去指定的地点安装好了，只是感觉胎壁有点软薄，不过价格很便宜的、一分钱一分货，实体店里卖的佳通轮胎是280元一个，价格相差太大，质量问题等跑段时间再来追加评论吧。卖家的服务很好，安装的师傅也还不错，值得五星好评！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Kyh-MQ-gez" userLabel="commentContentLabel">
+                        <rect key="frame" x="8" y="53" width="298" height="107.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFu-t7-lof">
-                        <rect key="frame" x="8" y="145" width="298" height="80"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFu-t7-lof" userLabel="commentImagesContentView">
+                        <rect key="frame" x="8" y="160.5" width="298" height="24"/>
                         <color key="backgroundColor" red="0.1688341525" green="0.66416114270000004" blue="0.01012211801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rFu-t7-lof" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="41E-tf-3Nl"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rFu-t7-lof" secondAttribute="bottom" id="4Gw-MJ-NAG"/>
                     <constraint firstItem="Kyh-MQ-gez" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="VGS-Ma-5hf"/>
                     <constraint firstItem="Kyh-MQ-gez" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="45" id="WtT-99-j2p"/>
                     <constraint firstItem="Kyh-MQ-gez" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="YoU-iY-GlE"/>
+                    <constraint firstItem="rFu-t7-lof" firstAttribute="top" secondItem="Kyh-MQ-gez" secondAttribute="bottom" id="bd6-Yh-YxO"/>
                     <constraint firstItem="rFu-t7-lof" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xLa-uu-sB8"/>
                 </constraints>
             </tableViewCellContentView>

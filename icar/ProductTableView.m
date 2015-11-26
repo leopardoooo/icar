@@ -81,11 +81,11 @@
         cell.priceLabel.font = [UIFont systemFontOfSize:17];
     }
     ProductResultModel *prm = _dataArray[ indexPath.row];
-    cell.titleLabel.text = prm.title;
+    cell.titleLabel.text = prm.prodName;
     cell.priceLabel.text = [NSString stringWithFormat:@"%d",[MixedUtils getRandomNumber:10 to:9999]];
     cell.commentLabel.text = [NSString stringWithFormat:@"%d", [MixedUtils getRandomNumber:10 to:9999]];
     //FIXME: 改用异步加载数据
-    NSURL *url = [NSURL URLWithString:prm.img];
+    NSURL *url = [NSURL URLWithString:prm.prodImageUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     [cell.bigImageView setImage: [UIImage imageWithData:data]];
     

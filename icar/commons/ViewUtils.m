@@ -48,6 +48,14 @@
     return line;
 }
 
++(void) viewAnyRadius: (UIView *) target any: (UIRectCorner) any radius: (CGSize) size {
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:target.bounds byRoundingCorners:any cornerRadii:CGSizeMake(5, 5)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = target.bounds;
+    maskLayer.path = maskPath.CGPath;
+    target.layer.mask = maskLayer;
+}
+
 /**
  *  单号文本的行高和宽度
  */
@@ -67,17 +75,19 @@
  *  自动消失提示框
  */
 +(void)showMessage:(NSString *)message{
+    CGSize labelSize = [self sizeWithSingleLine:message fontSize:17];
+    
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     UIView *showview =  [[UIView alloc]init];
     showview.backgroundColor = [UIColor blackColor];
     showview.frame = CGRectMake(1, 1, 1, 1);
-    showview.alpha = 1.0f;
-    showview.layer.cornerRadius = 5.0f;
+    showview.alpha = .8f;
+    showview.layer.cornerRadius = 16;
     showview.layer.masksToBounds = YES;
     [window addSubview:showview];
     
     UILabel *label = [[UILabel alloc]init];
-    CGSize labelSize = [self sizeWithSingleLine:message fontSize:17];
+    
     label.frame = CGRectMake(10, 5, labelSize.width, labelSize.height);
     label.text = message;
     label.textColor = [UIColor whiteColor];

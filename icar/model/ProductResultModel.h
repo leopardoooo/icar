@@ -10,9 +10,9 @@
 
 @interface ProductResultModel : NSObject
 
-@property(nonatomic, retain) NSString *title;
-@property(nonatomic, assign) float price;
+@property(nonatomic, retain) NSString *prodName;
+@property(nonatomic, assign) float prodPrice;
 @property(nonatomic, assign) long commentCount;
-@property(nonatomic, retain) NSString *img;
+@property(nonatomic, retain) NSString *prodImageUrl;
 
 @end

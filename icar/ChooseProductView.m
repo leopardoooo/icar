@@ -10,6 +10,7 @@
 #import "ViewUtils.h"
 #import "TemplateUtil.h"
 #import "MacroDefine.h"
+#import "CountInputView.h"
 
 #define CHOOSE_PRODUCT_VIEW_HEIGHT 300
 
@@ -51,25 +52,14 @@
 
 -(void)createSubViews{
     UILabel *countLabel = [TemplateUtil label:@"数量" fontSize:15 color:THEME_COLOR_NORMAL_OBJ frame:CGRectMake(15, 15, 70, 30)];
-    UIStepper *countStepper = [[UIStepper alloc]initWithFrame:CGRectMake(100, 15, 100, 60)];
-    countStepper.tintColor = THEME_COLOR_HIGHLIGHTED_ORAGE_OBJ;
-    countStepper.maximumValue = 100;
-    countStepper.minimumValue = 1;
-    [countStepper addTarget:self action:@selector(updateCountValue:) forControlEvents:UIControlEventValueChanged];
-    _countValue = [TemplateUtil label:@"1" fontSize:15 color:[UIColor blackColor] frame:CGRectMake(200, 15, 70, 30)];
-    
+    CountInputView *countView = [[CountInputView alloc]initWithFrame:CGRectMake(100, 15, 100, 30) borderColor:THEME_COLOR_HIGHLIGHTED_OBJ];
     [_bodyView addSubview:countLabel];
-    [_bodyView addSubview:countStepper];
-    [_bodyView addSubview:_countValue];
+    [_bodyView addSubview:countView];
     
     UIButton *okBtn = [TemplateUtil button:@"确定" fontSize:15 color:THEME_WHITE_COLOR frame:CGRectMake(0, CHOOSE_PRODUCT_VIEW_HEIGHT - 40, SCREEN_WIDTH, 40) radius:0 border:0 borderColor:nil bgColor:THEME_COLOR_HIGHLIGHTED_ORAGE_OBJ];
     [_bodyView addSubview:okBtn];
     
     [okBtn addTarget:self action:@selector(okAndRemoveFromSubView:) forControlEvents:UIControlEventTouchUpInside];
-}
-
--(void)updateCountValue: (UIStepper *) stepper{
-    _countValue.text = [NSString stringWithFormat:@"%.0f", stepper.value];
 }
 
 -(void)okAndRemoveFromSubView: (id)sender{
@@ -92,13 +82,5 @@
         [self removeFromSuperview];
     }];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

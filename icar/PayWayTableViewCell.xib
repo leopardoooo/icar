@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PayWayTableViewCell" rowHeight="56" id="KGk-i7-Jjw" customClass="PayWayTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mzm-vZ-9cH">
+                        <rect key="frame" x="8" y="8" width="60" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="ylN-y8-Fya"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付渠道名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRP-UF-asr">
+                        <rect key="frame" x="82" y="8" width="102" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="iMR-fY-UIX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商家提示信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ka-gi-lzT">
+                        <rect key="frame" x="82" y="30.5" width="190" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="T46-Tm-9F7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_radio.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZjE-h9-4ZE">
+                        <rect key="frame" x="294" y="19" width="18" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="D54-rJ-iI5"/>
+                            <constraint firstAttribute="height" constant="18" id="fwR-qP-fkY"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mzm-vZ-9cH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="8ys-os-GEJ"/>
+                    <constraint firstItem="2ka-gi-lzT" firstAttribute="top" secondItem="zRP-UF-asr" secondAttribute="bottom" constant="2" id="Gf7-tF-Ea3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="2ka-gi-lzT" secondAttribute="bottom" constant="-4" id="Miq-xi-8ww"/>
+                    <constraint firstItem="ZjE-h9-4ZE" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="RJR-uL-a0Z"/>
+                    <constraint firstItem="2ka-gi-lzT" firstAttribute="leading" secondItem="zRP-UF-asr" secondAttribute="trailing" constant="-102" id="UVA-KO-ERu"/>
+                    <constraint firstItem="zRP-UF-asr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="cv1-BB-2Oz"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="mzm-vZ-9cH" secondAttribute="bottom" constant="-0.5" id="eKX-X1-YXB"/>
+                    <constraint firstItem="2ka-gi-lzT" firstAttribute="leading" secondItem="mzm-vZ-9cH" secondAttribute="trailing" constant="14" id="fAM-gD-m5a"/>
+                    <constraint firstAttribute="centerY" secondItem="ZjE-h9-4ZE" secondAttribute="centerY" constant="-0.25" id="fTL-eb-lku"/>
+                    <constraint firstItem="ZjE-h9-4ZE" firstAttribute="leading" secondItem="2ka-gi-lzT" secondAttribute="trailing" constant="22" id="h05-aJ-917"/>
+                    <constraint firstItem="mzm-vZ-9cH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="hYs-15-Bxg"/>
+                    <constraint firstItem="zRP-UF-asr" firstAttribute="leading" secondItem="mzm-vZ-9cH" secondAttribute="trailing" constant="14" id="xBH-fo-hUu"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Gf7-tF-Ea3"/>
+                        <exclude reference="UVA-KO-ERu"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkBox" destination="ZjE-h9-4ZE" id="Nb3-IU-WpO"/>
+                <outlet property="payImageView" destination="mzm-vZ-9cH" id="SM2-uu-Idq"/>
+                <outlet property="paySubTitleLabel" destination="2ka-gi-lzT" id="DcV-G9-vqZ"/>
+                <outlet property="payTitleLabel" destination="zRP-UF-asr" id="4ty-kF-kwO"/>
+            </connections>
+            <point key="canvasLocation" x="214" y="271"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_radio.png" width="48" height="48"/>
+    </resources>
+</document>

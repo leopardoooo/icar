@@ -43,6 +43,12 @@
 +(CGSize) sizeWithLines: (NSString *) labelText fontSize: (CGFloat) fontSize width: (CGFloat) width;
 +(CGSize) sizeWithSingleLine: (NSString *) labelText fontSize: (CGFloat) fontSize;
 
+/* 为视图指定的角添加圆角效果
+ any: UIRectCornerBottomLeft | UIRectCornerBottomRight 下左及下右
+ any: UIRectCornerTopLeft | UIRectCornerTopRight 上左及上右
+ */
++(void) viewAnyRadius: (UIView *) target any: (UIRectCorner) any radius: (CGSize) size;
+
 /* 自动消失的提示框 */
 +(void)showMessage:(NSString *)message;
 

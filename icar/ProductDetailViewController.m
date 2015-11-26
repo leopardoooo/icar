@@ -152,7 +152,7 @@
     [superView addSubview:iconView];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, SCREEN_WIDTH - rw - 11, h - 14)];
-    [titleLabel setText:_product.title];
+    [titleLabel setText:_product.prodName];
     [titleLabel setNumberOfLines:2];
     
     UIView *splitLineView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - rw, 5, .5, h - 10)];
