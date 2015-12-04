@@ -39,7 +39,7 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.delegate = self;
     _scrollView.bounces = NO;
-    _scrollView.contentSize = CGSizeMake(bodyWidth * _pages, bodyHeight);
+    _scrollView.contentSize = CGSizeMake(bodyWidth * _pages, 0);
     
     int height = 16, padding = 10, width = 80;
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((bodyWidth - width)/2, bodyHeight - height - padding, width, height)];

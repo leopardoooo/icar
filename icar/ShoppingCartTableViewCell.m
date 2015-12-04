@@ -7,6 +7,7 @@
 //
 
 #import "ShoppingCartTableViewCell.h"
+#import "UIImageView+WebCache.h"
 @interface ShoppingCartTableViewCell (){
     ShoppingCartModel *_scm;
 }
@@ -40,8 +41,7 @@
 
 -(void)loadCellDataWithShoppingCartModel:(ShoppingCartModel *)scm{
     _scm = scm;
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:scm.prodCartImage]];
-    [_prodImageView setImage:[UIImage imageWithData:data]];
+    [_prodImageView sd_setImageWithURL:[NSURL URLWithString:scm.prodCartImage] placeholderImage:[UIImage imageNamed:@"bg_merchant_photo_placeholder_small"]];
     _prodTitleLabel.text = scm.prodName;
     _editSelectedDescLabel.text = scm.selectedDesc;
     [self resetDisplayBuyCount];

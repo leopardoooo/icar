@@ -16,6 +16,8 @@
 #import "SplitCategoryView.h"
 #import "SearchViewController.h"
 #import "ProductDetailViewController.h"
+#import "ProductDataLoader.h"
+
 
 @interface ProductViewController() <UIScrollViewDelegate>{
     UIScrollView * _scrollView;
@@ -23,7 +25,6 @@
     UILabel *_highlightLabelView;
     ProductTableView * _allTableView;
     ProductTableView * _myTempTableView;
-    NSArray * _dataArray;
     
     // 过滤，排序相关的组件声明
     OrderSwitchTableView * _orderSwitchView;
@@ -45,8 +46,6 @@
     // 初始化导航视图
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: [self createNavView]];
     
-    _dataArray = [self loadDataArray];
-    
     // 搜索过滤
     [self createFilterBar];
     
@@ -58,6 +57,9 @@
     
     // 添加浮层
     [self createFilterOrderModelView];
+    
+    // 加载数据
+    [_allTableView firstLoadTableData];
 }
 
 //
@@ -142,74 +144,20 @@
 
 //scrollView
 -(void)createScrollView{
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 36, SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 36, SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT - 140)];
     _scrollView.pagingEnabled = YES;
     _scrollView.backgroundColor = [UIColor clearColor];
-    _scrollView.contentSize = CGSizeMake(SELF_SIZE_WIDTH * _tabLabelViews.count, SELF_SIZE_HEIGHT);
+    _scrollView.contentSize = CGSizeMake(SELF_SIZE_WIDTH * _tabLabelViews.count, 0);
     _scrollView.delegate = self;
     _scrollView.bounces = NO;
     _scrollView.bouncesZoom = NO;
     [self.view addSubview:_scrollView];
     
     // 表格初始化
-    _allTableView = [[ProductTableView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT) parent:self ];
-    _myTempTableView = [[ProductTableView alloc] initWithFrame:CGRectMake(SELF_SIZE_WIDTH, 0, SELF_SIZE_WIDTH, SELF_SIZE_HEIGHT) parent:self];
-    _allTableView.dataArray = _dataArray;
-    _myTempTableView.dataArray = _dataArray;
+    _allTableView = [[ProductTableView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, _scrollView.frame.size.height) parent:self ];
+    _myTempTableView = [[ProductTableView alloc] initWithFrame:CGRectMake(SELF_SIZE_WIDTH, 0, SELF_SIZE_WIDTH, _scrollView.frame.size.height) parent:self];
     [_scrollView addSubview:_allTableView];
     [_scrollView addSubview:_myTempTableView];
-}
-
-#pragma mark 加载数据接口方法
-//FIXME: 加载数据
--(NSArray *)loadDataArray{
-    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
-    ProductResultModel *prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 205/55R16 91V CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/14/goods_img/20135_G_1394769479177.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"米其林 国产轮胎 韧悦 195/65R15 91V Energy XM2";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/11/12/goods_img/24796_P_1415773191025.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"固特异 轮胎 配套大师 195/65R15 91V Eagle NCT5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/201510/goods_img/normal_p_144556842131682105.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"普利司通 轮胎 绿歌伴 205/55R16 91V EP200";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/08/11/goods_img/23574_G_1407759443009.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
-    [dataArray addObject:prm];
-    
-    prm = [[ProductResultModel alloc] init];
-    prm.prodName = @"马牌 轮胎 195/65R15 91H CC5";
-    prm.prodImageUrl = @"http://img.tqmall.com/images/goods/2014/03/31/goods_img/19819_G_1396245672348.jpg";
-    [dataArray addObject:prm];
-    
-    return dataArray;
 }
 
 #pragma mark 按钮事件处理方法

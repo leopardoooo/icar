@@ -12,6 +12,6 @@
 
 
 // 查询我的购物车清单
-+(NSArray *)queryMyShoppingCarts;
++(void)queryMyCartWithHandler: (void (^)(NSMutableArray * data)) handler;
 
 @end

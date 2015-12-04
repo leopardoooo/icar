@@ -1,0 +1,19 @@
+//
+//  icar-preffix.pch
+//  icar
+//
+//  Created by Killer on 15/12/1.
+//  Copyright (c) 2015年 杭州聚轮网络科技有限公司. All rights reserved.
+//
+
+#ifndef TARGET_OS_IOS
+
+#define TARGET_OS_IOS TARGET_OS_IPHONE
+
+#endif
+
+#ifndef TARGET_OS_WATCH
+
+#define TARGET_OS_WATCH 0
+
+#endif

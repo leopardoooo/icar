@@ -12,6 +12,8 @@
 #import "SearchViewController.h"
 #import "JLCarouselView.h"
 #import "AppNavigationController.h"
+#import "UIImageView+WebCache.h"
+#import "QuickNavCollectionView.h"
 
 // 宏定义
 #define NAV_SIZE self.navigationController.navigationBar.frame.size
@@ -36,6 +38,12 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeAll;
     [self initAndAddCarouselView];
+    
+    
+    CGFloat top = self.carouselView.frame.origin.x + self.carouselView.frame.size.height;
+    QuickNavCollectionView *quickNav = [[QuickNavCollectionView alloc] initWithTop: top + 5];
+    [self.view addSubview:quickNav];
+    
     
     // 重写导航条
     UIView *navView = [[UIView alloc] initWithFrame:CGRectMake(0, 12, NAV_SIZE.width, NAV_SIZE.height - 12)];
@@ -66,10 +74,9 @@
     NSArray *ads = @[@"http://img.tqmall.com/config/2015/07/10/143649893449_web.jpg",@"http://img.tqmall.com/config/2015/07/20/143737134574_web.jpg",@"http://img.tqmall.com/config/2015/09/29/144351121430_web.jpg",@"http://img.tqmall.com/config/2015/10/22/144547593086_web.jpg",@"http://img.tqmall.com/config/2015/08/11/143925567550_web.jpg"];
 
     for (int i = 0 ; i < ads.count; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.carouselView.frame.size.width * i, 0, self.carouselView.frame.size.width, self.carouselView.frame.size.height)];        
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:ads[i]]];
-        UIImage *image = [[UIImage alloc] initWithData:data];
-        [imageView setImage:image];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.carouselView.frame.size.width * i, 0, self.carouselView.frame.size.width, self.carouselView.frame.size.height)];
+        // 异步加载图片
+        [imageView sd_setImageWithURL:[NSURL URLWithString:ads[i]] placeholderImage:[UIImage imageNamed:@"arrow"]];
         [self.carouselView addToScrollView:imageView];
     }
     

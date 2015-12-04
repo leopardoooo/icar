@@ -11,9 +11,19 @@
 #import "ProductResultModel.h"
 #import "MixedUtils.h"
 #import "ProductDetailViewController.h"
+#import "MJRefresh.h"
+#import "ProductDataLoader.h"
+#import "UIImageView+WebCache.h"
+#import "MacroDefine.h"
+#import "ViewUtils.h"
+
+#define ProductViewController_LOAD_LIMIT 15
+#define ProductViewController_PAGE_INFO_FONT_SIZE 10
 
 @interface ProductTableView ()<UITableViewDelegate, UITableViewDataSource>{
     UIViewController * _parent;
+    Pager *_lastPage;
+    UILabel * _pageInfoLabel;
 }
 
 @end
@@ -27,8 +37,85 @@
         
         self.dataSource = self;
         self.delegate = self;
+        
+        _dataArray = [[NSMutableArray alloc] init];
+        
+        __unsafe_unretained __typeof(self) weakSelf = self;
+        // 上拉加载更多
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            NSInteger newStart =  _lastPage.start + _lastPage.limit;
+            [weakSelf loadTableDataWithStart:_lastPage ? newStart : 0 done:^{
+                [weakSelf.mj_footer endRefreshing];
+            }];
+        }];
+        // 下拉重新开始刷新
+        self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf loadTableDataWithStart: 0 done:^{
+                [weakSelf.mj_header endRefreshing];
+            }];
+        }];
+        
+        // 设置文字
+        self.mj_footer = footer;
+        
+        // 分页信息浮层
+        _pageInfoLabel = [[UILabel alloc] init];
+        _pageInfoLabel.textAlignment = NSTextAlignmentCenter;
+        _pageInfoLabel.alpha = 0;
+        _pageInfoLabel.backgroundColor = [UIColor colorWithWhite:0.098 alpha:0.510];
+        _pageInfoLabel.textColor = THEME_WHITE_COLOR;
+        _pageInfoLabel.font = [UIFont systemFontOfSize:ProductViewController_PAGE_INFO_FONT_SIZE];
+        _pageInfoLabel.layer.cornerRadius = 3;
+        _pageInfoLabel.layer.masksToBounds = YES;
+        [self addSubview:_pageInfoLabel];
     }
     return self;
+}
+
+-(void) firstLoadTableData {
+    // 马上进入刷新状态
+    [self.mj_header beginRefreshing];
+}
+
+#pragma mark table上下滚动事件重写
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if(_lastPage){
+        _pageInfoLabel.alpha = 1;
+    }
+}
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(_lastPage){
+        [UIView animateWithDuration:2.0 animations:^{
+            _pageInfoLabel.alpha = 0;
+        }];
+    }
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSIndexPath *lastIndexPath = [[self indexPathsForVisibleRows] firstObject];
+    NSString *pageInfo = [NSString stringWithFormat:@"%ld / %ld", lastIndexPath.row + 1, _lastPage.totalCount];
+    CGSize size = [ViewUtils sizeWithSingleLine:pageInfo fontSize:ProductViewController_PAGE_INFO_FONT_SIZE];
+    // 左右间距，上下间距
+    CGFloat width = size.width + 8, height = size.height + 6;
+    _pageInfoLabel.text = pageInfo;
+    _pageInfoLabel.frame = CGRectMake((self.frame.size.width - width)/2, self.frame.size.height - height - 60 + scrollView.contentOffset.y, width , height);
+}
+
+#pragma mark 加载数据
+-(void)loadTableDataWithStart: (NSInteger) start done: (void (^)(void)) done{
+    __unsafe_unretained __typeof(self) weakSelf = self;
+    // 异步加载数据
+    [ProductDataLoader queryProdList:start withLimit:ProductViewController_LOAD_LIMIT success:^(Pager *page) {
+        done();
+        _lastPage = page;
+        if(start == 0){
+            [_dataArray removeAllObjects];
+        }
+        [_dataArray addObjectsFromArray: page.records];
+        [weakSelf reloadData];
+    } failure:^{
+        NSLog(@"网络繁忙，请稍后在试试!");
+        done();
+    }];
 }
 
 #pragma make 表格代理实现
@@ -86,8 +173,7 @@
     cell.commentLabel.text = [NSString stringWithFormat:@"%d", [MixedUtils getRandomNumber:10 to:9999]];
     //FIXME: 改用异步加载数据
     NSURL *url = [NSURL URLWithString:prm.prodImageUrl];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    [cell.bigImageView setImage: [UIImage imageWithData:data]];
+    [cell.bigImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bg_merchant_photo_placeholder_small"]];
     
     UIImage *img1 = [UIImage imageNamed:@"icon_deal_ guarantee"];
     UIImage *img2 = [UIImage imageNamed:@"icon_deal_mainpush"];
@@ -108,13 +194,5 @@
     ProductResultModel *prm = _dataArray[indexPath.row];
     [ProductDetailViewController openProductDetailViewController:_parent withProduct:prm];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

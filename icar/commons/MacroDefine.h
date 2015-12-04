@@ -6,7 +6,8 @@
 //  Copyright (c) 2015年 杭州聚轮网络科技有限公司. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef icar_MacroDefine_h
+#define icar_MacroDefine_h
 
 // 默认高亮的字体颜色
 #define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.143 green:0.673 blue:0.620 alpha:1.000]
@@ -50,6 +51,4 @@
 #define iOS7_0 @"7.0";
 
 
-@interface MacroDefine : NSObject
-
-@end
+#endif

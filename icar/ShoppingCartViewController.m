@@ -16,6 +16,7 @@
 #import "ProductResultModel.h"
 #import "ConfirmOrderViewController.h"
 #import "ViewUtils.h"
+#import "MJRefresh.h"
 
 @interface ShoppingCartViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>{
     UIBarButtonItem *_editItem;
@@ -50,11 +51,24 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorColor = THEME_COLOR_BORDER_OBJ;
-    
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMyCartData)];
     [self.view addSubview:_tableView];
     
+    // 开始加载数据
+    [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark  加载数据
+-(void)loadMyCartData{
     // 加载数据
-    _dataArray = [MyCartDataLoader queryMyShoppingCarts];
+    [MyCartDataLoader queryMyCartWithHandler:^(NSMutableArray *data) {
+        _editing = NO;
+        _checkAll = NO;
+        
+        [_tableView.mj_header endRefreshing];
+        _dataArray = data;
+        [_tableView reloadData];
+    }];
 }
 
 #pragma mark 事件处理实现

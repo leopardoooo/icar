@@ -10,8 +10,11 @@
 
 @interface ProductTableView : UITableView
 
-@property(nonatomic, strong) NSArray * dataArray;
+@property(nonatomic, strong) NSMutableArray * dataArray;
 
 -(instancetype)initWithFrame:(CGRect)frame parent: (UIViewController *) parent;
+
+// 首次加载数据
+-(void) firstLoadTableData;
 
 @end
