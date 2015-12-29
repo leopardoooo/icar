@@ -11,20 +11,21 @@
 #import "Pager.h"
 #import "ProductResultModel.h"
 #import "AFNetworking.h"
-
-#define HTTP_QUERY_PROD_LIST @"%@data/prodList.jsp?start=%ld&limit=%ld"
+#import "DataLoaderUtils.h"
 
 @implementation ProductDataLoader
 
-+(void)queryProdList:(NSInteger)start withLimit:(NSInteger)limit success: (void (^)(Pager * page)) success
-    failure: (void (^)(void)) failure {
-    // 生成URL
-    NSString *urlString = [NSString stringWithFormat:HTTP_QUERY_PROD_LIST, HTTP_SERVER_PREFFIX, start, limit, nil];
++(void)queryProdList:(NSInteger)start
+           withLimit:(NSInteger)limit
+             success: (void (^)(Pager * page)) success
+             failure: (void (^)(NSError *)) failure
+                done: (void(^)(void)) done{
     
     NSDictionary *params = @{@"start": [NSNumber numberWithInteger:start], @"limit": [NSNumber numberWithInteger:limit]};
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [DataLoaderUtils julunHttpPost:sysHttpProduct_QueryList params:params parseHandler:^id(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // 解析数据
         Pager *page = [[Pager alloc] init];
         [page setValuesForKeysWithDictionary: responseObject];
         
@@ -40,15 +41,8 @@
         }
         page.records = records;
         
-        // 调用回调函数
-        dispatch_async(dispatch_get_main_queue(), ^{
-            success(page);
-        });
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            failure();
-        });
-    }];
+        return page;
+    } success:success failure:failure done:done];
 }
 
 @end

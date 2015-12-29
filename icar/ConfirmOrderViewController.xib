@@ -28,7 +28,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="uRP-gG-d7t"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="18.100000381469727"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15.100000381469727"/>
                             <state key="normal" title="确认">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -37,15 +37,15 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zg-ga-FMv" userLabel="totalLabel">
-                            <rect key="frame" x="475" y="0.0" width="10.5" height="44"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="476" y="0.0" width="10" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soV-9L-Up8">
-                            <rect key="frame" x="425" y="0.0" width="39" height="44"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="430" y="0.0" width="34.5" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

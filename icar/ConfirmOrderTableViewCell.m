@@ -23,8 +23,6 @@
 - (void)awakeFromNib {
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    _prodSelectedDescLabel.font = [UIFont systemFontOfSize:11];
-    _subTotalFeeLabel.font = [UIFont systemFontOfSize:15];
     
     // 嵌套表格
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -90,6 +88,7 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@:", item[0]];
         float width = cell.contentView.frame.size.width - 90;
         UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(80, 0, width, ConfirmOrderTableViewCell_ROW_HEIGHT)];
+        field.font = [UIFont systemFontOfSize:13];
         field.keyboardType = UIKeyboardTypeDefault;
         field.text = item[1];
         field.delegate = self;

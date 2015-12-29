@@ -7,6 +7,7 @@
 //
 
 #import "JLCarouselView.h"
+#import "MacroDefine.h"
 
 @interface JLCarouselView () <UIScrollViewDelegate>{
     NSInteger _pages;
@@ -33,20 +34,20 @@
 }
 
 -(void)initRequiredView{
-    int bodyWidth = self.frame.size.width, bodyHeight = self.frame.size.height;
+    CGFloat bodyWidth = self.frame.size.width, bodyHeight = self.frame.size.height;
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, bodyWidth, bodyHeight)];
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.delegate = self;
     _scrollView.bounces = NO;
-    _scrollView.contentSize = CGSizeMake(bodyWidth * _pages, 0);
+    _scrollView.contentSize = CGSizeMake(bodyWidth * _pages, bodyHeight);
     
-    int height = 16, padding = 10, width = 80;
+    CGFloat height = 16, padding = 10, width = 80;
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((bodyWidth - width)/2, bodyHeight - height - padding, width, height)];
     _pageControl.layer.cornerRadius = 4;
     _pageControl.numberOfPages = _pages;
     _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    _pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:0.145 green:0.682 blue:0.722 alpha:1.000];
+    _pageControl.currentPageIndicatorTintColor = THEME_COLOR_HIGHLIGHTED_OBJ;
     
     [self addSubview:_scrollView];
     [self addSubview:_pageControl];

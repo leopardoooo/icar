@@ -61,7 +61,7 @@
 
 - (IBAction)payButtonClick:(id)sender {
     if(!_selectedIndexPath){
-        [ViewUtils showMessage:@"请选择支付方式"];
+        [ViewUtils showAnyIconMessage:JLMessageIconTypeWarn withMessage:@"选择支付方式"];
         return ;
     }
     PayWayModel *payway = _dataArray[_selectedIndexPath.row];

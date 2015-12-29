@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface QuickNavCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *navImageView;
+@property (weak, nonatomic) IBOutlet UILabel *navLabel;
 
 @end

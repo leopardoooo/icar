@@ -17,6 +17,7 @@
 #import "SearchViewController.h"
 #import "ProductDetailViewController.h"
 #import "ProductDataLoader.h"
+#import "TemplateUtil.h"
 
 
 @interface ProductViewController() <UIScrollViewDelegate>{
@@ -32,6 +33,9 @@
     UIButton *_filterBtn;
     UIButton *_saleOrderBtn;
     UIButton *_complexOrderBtn;
+    
+    // top
+    UIButton *_backTopBtn;
 }
 @end
 
@@ -60,6 +64,10 @@
     
     // 加载数据
     [_allTableView firstLoadTableData];
+    
+    // 返回到顶部按钮
+    _backTopBtn = [TemplateUtil buttonWithImage:[UIImage imageNamed:@"back_top"] frame:CGRectMake(SELF_SIZE_WIDTH - 60, SELF_SIZE_HEIGHT - 195, 36, 36)];
+    [self.view addSubview:_backTopBtn];
 }
 
 //

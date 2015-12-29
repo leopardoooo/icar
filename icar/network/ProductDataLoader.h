@@ -12,6 +12,10 @@
 @interface ProductDataLoader : NSObject
 
 // 查询产品列表，分页查询
-+(void)queryProdList:(NSInteger)start withLimit:(NSInteger)limit success: (void (^)(Pager * page)) success failure: (void (^)(void)) failure;
++(void)queryProdList:(NSInteger)start
+           withLimit:(NSInteger)limit
+             success: (void (^)(Pager * page)) success
+             failure: (void (^)(NSError * error)) failure
+                done: (void(^)(void)) done;
 
 @end

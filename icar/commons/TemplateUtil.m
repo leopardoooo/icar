@@ -28,6 +28,7 @@ TBorder TBorderMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left){
  */
 +(UIButton *) buttonWithImage: (UIImage *) image frame: (CGRect) frame {
     UIButton *target = [UIButton buttonWithType:UIButtonTypeCustom];
+    target.frame = frame;
     [target setImage:image forState:UIControlStateNormal];
     return target;
 }

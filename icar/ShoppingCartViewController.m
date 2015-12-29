@@ -17,13 +17,19 @@
 #import "ConfirmOrderViewController.h"
 #import "ViewUtils.h"
 #import "MJRefresh.h"
+#import "MBProgressHUD.h"
+#import "TipMessageView.h"
+#import "Resources.h"
 
-@interface ShoppingCartViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>{
+@interface ShoppingCartViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>{
     UIBarButtonItem *_editItem;
     UITableView *_tableView;
-    NSArray *_dataArray;
+    NSMutableArray *_dataArray;
     BOOL _editing;
     BOOL _checkAll;
+    NSIndexPath *_currentIndexPath;
+    TipMessageView * _networkErrorView;
+    TipMessageView * _emptyRecordView;
 }
 
 @end
@@ -34,7 +40,7 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeAll;
     _editItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(didOpenEditMode)];
-    [_editItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
+    [_editItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = _editItem;
     
     // 结算工具条增加边框颜色
@@ -61,12 +67,32 @@
 #pragma mark  加载数据
 -(void)loadMyCartData{
     // 加载数据
-    [MyCartDataLoader queryMyCartWithHandler:^(NSMutableArray *data) {
+    [MyCartDataLoader queryMyCart:^(NSMutableArray *data) {
         _editing = NO;
         _checkAll = NO;
-        
-        [_tableView.mj_header endRefreshing];
         _dataArray = data;
+        // 没有数据
+        if(!_dataArray || _dataArray.count == 0){
+            if(!_emptyRecordView){
+                _emptyRecordView = [TipMessageView instanceEmptyOrderView:_tableView];
+            }
+            _emptyRecordView.hidden = NO;
+        }else{
+            if(_emptyRecordView){
+                _emptyRecordView.hidden = YES;
+            }
+        }
+        _networkErrorView.hidden = YES;
+    } failure:^(NSError * error){
+        // 提示
+        if(!_networkErrorView){
+            _networkErrorView = [TipMessageView instanceNetworkErrorView:_tableView];
+            [_networkErrorView.reloadBtn addTarget:_tableView.mj_header action:@selector(beginRefreshing) forControlEvents:UIControlEventTouchUpInside];
+        }
+        _networkErrorView.hidden = NO;
+        [_dataArray removeAllObjects];
+    } done:^{
+        [_tableView.mj_header endRefreshing];
         [_tableView reloadData];
     }];
 }
@@ -107,7 +133,7 @@
     if(prods.count > 0 ){
         [ConfirmOrderViewController open:self withData: prods];
     }else{
-        [ViewUtils showMessage:@"请先选择商品!"];
+        [ViewUtils showAnyIconMessage:JLMessageIconTypeWarn withMessage:@"选择商品"];
     }
 }
 // 删除选中的商品
@@ -149,14 +175,14 @@
 }
 // 删除选中的商品
 -(void)removeSelectedProducts{
-    NSArray *keepProds = [self getAnyProductsWithChecked: NO];
+    NSMutableArray *keepProds = [self getAnyProductsWithChecked: NO];
     if(keepProds.count < _dataArray.count){
         _dataArray = keepProds;
         [_tableView reloadData];
     }
 }
 // 获得选中或者非选中状态的商品
--(NSArray *) getAnyProductsWithChecked: (BOOL) checked{
+-(NSMutableArray *) getAnyProductsWithChecked: (BOOL) checked{
     NSMutableArray *anyArray = [[NSMutableArray alloc] init];
     [_dataArray enumerateObjectsUsingBlock:^(ShoppingCartModel *scm, NSUInteger idx, BOOL *stop) {
         if(scm.checked == checked){
@@ -221,6 +247,36 @@
     prm.prodImageUrl = scm.prodCartImage;
     
     [ProductDetailViewController openProductDetailViewController:self withProduct:prm];
+}
+//当在Cell上滑动时会调用此函数
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return  UITableViewCellEditingStyleDelete;
+}
+// delete文字改成中文
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+// 点击删除按钮
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    _currentIndexPath = indexPath;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确定删除该商品?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+        {
+            [ViewUtils showAnyIconMessage:JLMessageIconTypeCompleted withMessage:@"删除成功"];
+            [_dataArray removeObjectAtIndex:_currentIndexPath.row];
+            [_tableView reloadData];
+            
+            
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

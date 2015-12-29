@@ -9,6 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIkit.h>
 
+// 枚举消息图标类型
+typedef enum {
+    // 普通提示消息
+    JLMessageIconTypeInfo,
+    // 警告消息
+    JLMessageIconTypeWarn,
+    // 操作完成
+    JLMessageIconTypeCompleted,
+    // 错误消息
+    JLMessageIconTypeError,
+    // loading
+    JLMessageIconTypeLoading
+    
+} JLMessageIconType ;
+
 @interface ViewUtils : NSObject
 
 /**
@@ -49,7 +64,10 @@
  */
 +(void) viewAnyRadius: (UIView *) target any: (UIRectCorner) any radius: (CGSize) size;
 
-/* 自动消失的提示框 */
-+(void)showMessage:(NSString *)message;
+/* 在keyWindow自动消失的提示框, 图标类型可以通过枚举类型指定 */
++(void)showAnyIconMessage: (JLMessageIconType) iconType withMessage:(NSString *) message;
+
++(void)showTextMessage: (NSString *) message;
+
 
 @end

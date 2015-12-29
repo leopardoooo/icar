@@ -50,9 +50,6 @@
     [super viewDidLoad];
     // 样式设置
     _totalFeeLabel.text = @"1000.00";
-    _totalFeeLabel.font = [UIFont systemFontOfSize:17];
-    _labelForTotalFee.font = [UIFont systemFontOfSize:14];
-    _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_bottomBarContentView addTopBorderWithColor:[UIColor colorWithWhite:0.777 alpha:1.000] andWidth:.7];
     
     // tableView

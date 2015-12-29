@@ -16,6 +16,7 @@
 #import "TemplateUtil.h"
 #import "AutoTextMarkView.h"
 #import "ImageBrowserViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface ProdEvaluationView () <UITableViewDelegate, UITableViewDataSource>{
     
@@ -132,15 +133,17 @@
     NSArray *imgUrls = [self getImageData];
     
     FlowLayoutView *flowView = [[FlowLayoutView alloc] initWithFrame:CGRectMake(0, 0, width, 0) hpadding:5 vpadding:5 startPosx:0];
-    
     int imgWidth = (width - 5 * 4 ) / 4.0;
+    
+    // 手势操作
     for (int i =0 ; i < imgUrls.count; i ++) {
-        UIButton *btnView = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImageView *btnView = [[UIImageView alloc] init];
+        btnView.userInteractionEnabled = YES;
         btnView.frame = CGRectMake((imgWidth + 5) * i , 0, imgWidth, imgWidth);
         NSURL *url = [NSURL URLWithString:imgUrls[i]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        [btnView setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
-        [btnView addTarget:self action:@selector(openImageBrowser:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [btnView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bg_merchant_photo_placeholder_small"]];
+        [btnView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openImageBrowser:)]];
         
         [flowView addSubview:btnView];
     }

@@ -14,6 +14,8 @@
 #import "AppNavigationController.h"
 #import "UIImageView+WebCache.h"
 #import "QuickNavCollectionView.h"
+#import "MJRefresh.h"
+#import "MessageCenterViewController.h"
 
 // 宏定义
 #define NAV_SIZE self.navigationController.navigationBar.frame.size
@@ -39,9 +41,15 @@
     self.edgesForExtendedLayout = UIRectEdgeAll;
     [self initAndAddCarouselView];
     
+    // 刷新
+    UIScrollView *rootView = (UIScrollView *)self.view;
+    MJRefreshNormalHeader *mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [rootView.mj_header endRefreshing];
+    }];
+    rootView.mj_header = mj_header;
     
     CGFloat top = self.carouselView.frame.origin.x + self.carouselView.frame.size.height;
-    QuickNavCollectionView *quickNav = [[QuickNavCollectionView alloc] initWithTop: top + 5];
+    QuickNavCollectionView *quickNav = [[QuickNavCollectionView alloc] initWithTop: top];
     [self.view addSubview:quickNav];
     
     
@@ -67,10 +75,9 @@
 }
 
 -(void)initAndAddCarouselView{
-    self.carouselView = [[JLCarouselView alloc]initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 160) withPages:5];
+    self.carouselView = [[JLCarouselView alloc]initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 120) withPages:5];
     self.carouselView.pageControl.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.1];
     // 添加广告页
-//FIXME: 需要修改成异步加载，不然影响效率，推荐SDImageXXX第三方
     NSArray *ads = @[@"http://img.tqmall.com/config/2015/07/10/143649893449_web.jpg",@"http://img.tqmall.com/config/2015/07/20/143737134574_web.jpg",@"http://img.tqmall.com/config/2015/09/29/144351121430_web.jpg",@"http://img.tqmall.com/config/2015/10/22/144547593086_web.jpg",@"http://img.tqmall.com/config/2015/08/11/143925567550_web.jpg"];
 
     for (int i = 0 ; i < ads.count; i++) {
@@ -101,11 +108,17 @@
     msgBtn.frame = CGRectMake(padding + imgw, 0, imgw, imgh);
     [msgBtn setImage:[UIImage imageNamed:@"icon_homepage_message"]
         forState:UIControlStateNormal];
+    [msgBtn addTarget:self action:@selector(openMessageCenter:) forControlEvents:UIControlEventTouchUpInside];
     
     [view addSubview:scanBtn];
     [view addSubview:msgBtn];
     return view;
 }
+#pragma mark 事件处理方法
+-(void)openMessageCenter: (id)sender{
+    [MessageCenterViewController open:self];
+}
+
 #pragma mark 创建搜索视图
 -(UIView *) createSearchView{
     int w = 210, padding = (NAV_SIZE.width - _barLeftView.frame.size.width - _barToolsView.frame.size.width - w)/2;
@@ -122,7 +135,7 @@
     
     UILabel *keywordLabel = [[UILabel alloc] initWithFrame:CGRectMake(26, 0, view.frame.size.width - 26, view.frame.size.height)];
     keywordLabel.text = @"输入宝贝名称、型号、品牌";
-    keywordLabel.textColor = [UIColor colorWithRed:0.161 green:0.771 blue:0.707 alpha:1.000];
+    keywordLabel.textColor = THEME_COLOR_HIGHLIGHTED_OBJ;
     keywordLabel.font = [UIFont systemFontOfSize:13];
     
     [view addSubview:keywordLabel];

@@ -19,8 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSArray *normalNames = @[@"icon_tabbar_homepage",@"icon_tabbar_merchant_normal",@"icon_tabbar_onsite",@"icon_tabbar_mine"];
-    NSArray *selectedNames = @[@"icon_tabbar_homepage_selected",@"icon_tabbar_merchant_selected",@"icon_tabbar_onsite_selected",@"icon_tabbar_mine_selected"];
+    NSArray *normalNames = @[@"icon_tabbar_homepage",@"icon_tabbar_merchant_normal",@"icon_tabbar_misc",@"icon_tabbar_onsite",@"icon_tabbar_mine"];
+    NSArray *selectedNames = @[@"icon_tabbar_homepage_selected",@"icon_tabbar_merchant_selected",@"icon_tabbar_misc_selected",@"icon_tabbar_onsite_selected",@"icon_tabbar_mine_selected"];
     
     NSDictionary *normalAttrs = [[NSDictionary alloc] initWithObjectsAndKeys:THEME_COLOR_NORMAL_OBJ,NSForegroundColorAttributeName,nil];
     NSDictionary *highlightedAttrs = [[NSDictionary alloc] initWithObjectsAndKeys:THEME_COLOR_HIGHLIGHTED_OBJ,NSForegroundColorAttributeName,nil];

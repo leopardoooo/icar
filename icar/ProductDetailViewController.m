@@ -20,6 +20,7 @@
 #import "ProductBuyBarView.h"
 #import "SplitLineLabelView.h"
 #import "SimpleWebView.h"
+#import "UIImageView+WebCache.h"
 
 @interface ProductDetailViewController (){
     ProductResultModel * _product;
@@ -91,7 +92,7 @@
     // WebView
     SimpleWebView *webView = [[SimpleWebView alloc]initWithFrame:CGRectMake(0, 510 + 660 + 40, SELF_SIZE_WIDTH, 10)];
     [_rootView addSubview:webView];
-    [webView loadRequestWithString:@"http://h5.m.jd.com/active/download/download.html?source=RankingMain"];
+    //[webView loadRequestWithString:@"http://h5.m.jd.com/active/download/download.html?source=RankingMain"];
     
     // 底部购买栏
     _buyBarView = [[ProductBuyBarView alloc] initWithParent:self withProduct:_product];
@@ -123,15 +124,14 @@
     JLCarouselView *imgCarouselView = [[JLCarouselView alloc] initWithFrame:CGRectMake(0, 0, SELF_SIZE_WIDTH, 300) withPages:imgArray.count];
     imgCarouselView.pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0.910 alpha:0.900];
     int w = imgCarouselView.frame.size.width, h = imgCarouselView.frame.size.height;
+   
     for (int i = 0 ; i < imgArray.count; i++) {
         NSURL *url = [NSURL URLWithString:imgArray[i]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *img = [UIImage imageWithData:data];
-        
-        UIButton *btnView = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImageView *btnView = [[UIImageView alloc] init];
         btnView.frame = CGRectMake(w * i, 0, w, h);
-        [btnView addTarget:self action:@selector(openImageBrowser:) forControlEvents:UIControlEventTouchUpInside];
-        [btnView setImage:img forState:UIControlStateNormal];
+        btnView.userInteractionEnabled = YES;
+        [btnView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openImageBrowser:)]];
+        [btnView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bg_merchant_photo_placeholder_small"]];
         [imgCarouselView addToScrollView: btnView];
     }
     imgCarouselView.pageControl.frame = CGRectMake(0, imgCarouselView.frame.size.height - 40, imgCarouselView.frame.size.width, 40);
@@ -225,7 +225,7 @@
 -(void)didCollectProd: (UIButton *)btn{
     _collectMark = !_collectMark;
     [self toggleCollectIcon];
-    [ViewUtils showMessage:_collectMark ? @"成功收藏":@"取消完成"];
+    [ViewUtils showAnyIconMessage:JLMessageIconTypeCompleted withMessage:_collectMark ? @"成功收藏":@"取消完成"];
 }
 // 根据当前的收藏标志设置显示图标
 -(void)toggleCollectIcon{

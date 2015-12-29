@@ -14,7 +14,6 @@
     // Initialization code
     
     //self.selectionStyle = UITableViewCellSelectionStyleNone;
-    _paySubTitleLabel.font = [UIFont systemFontOfSize:12];
 }
 
 -(void)setCheckStateView:(BOOL)state{

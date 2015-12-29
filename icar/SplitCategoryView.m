@@ -30,9 +30,8 @@
 
 -(void)createBodyView{
     
-    UIView *bodyView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, 260)];
+    UIView *bodyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 260)];
     bodyView.backgroundColor = [UIColor whiteColor];
-    [ViewUtils view:bodyView radius:3.0];
     
     [self addSubview:bodyView];
 }

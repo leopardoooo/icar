@@ -14,7 +14,26 @@
 #ifndef icar_Settings_h
 #define icar_Settings_h
 
-/* 系统服务端URL，这仅仅是前面一部分的URL，完整的URL应该HTTP_SERVER_PREFFIX + 具体的业务地址 */
-#define HTTP_SERVER_PREFFIX @"http://120.26.67.181:8088/icar/"
+// 系统版本号
+#define sysVersion 0.0.1
+
+/* 系统服务端URL，这仅仅是前面一部分的URL，完整的URL应该sysHttpServerPreffix + 具体的业务地址 */
+#define sysHttpServerPreffix @"http://120.26.67.181:8088/icar/"
+//#define sysHttpServerPreffix @"http://127.0.0.1:8080/icar-http/"
+
+#pragma mark 产品相关的URI
+// 查询产品可用产品
+#define sysHttpProduct_QueryList @"data/prodList.jsp"
+
+#pragma mark 购物车相关的URI
+// 查询购物车列表
+#define sysHttpCart_QueryList @"data/myCart.jsp"
+// 查询我的消息
+#define sysHttpCart_MyMessageList @"data/myMsg.jsp"
+
+
+/* 系统是否是第一次启动的标志Key，该标志用于AppDelegate.m */
+#define sysDefaultFirstLaunchKey @"firstLaunchKey"
+
 
 #endif

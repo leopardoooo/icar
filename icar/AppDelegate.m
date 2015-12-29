@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "MacroDefine.h"
+#import "WelcomeViewController.h"
+#import "Settings.h"
+
+
 
 @interface AppDelegate ()
 
@@ -20,22 +24,34 @@
     // Override point for customization after application launch.
     
     // 隐藏返回图标的文字
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1300, 0) forBarMetrics:UIBarMetricsDefault];
+    //[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1300, 0) forBarMetrics:UIBarMetricsDefault];
     
     // 设置返回图标
-    [UINavigationBar appearance].backIndicatorImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [UINavigationBar appearance].backIndicatorImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [[UIImage imageNamed:@"btn_backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //
-    [UINavigationBar appearance].tintColor = [UIColor colorWithWhite:0.167 alpha:1.000];
-    UIFont *font = [UIFont systemFontOfSize:13];
-    [UIButton appearance].titleLabel.font = font;
-    [UILabel appearance].font = font;
-    [UITextView appearance].font = font;
-    [UITextField appearance].font = font;
+    [UINavigationBar appearance].tintColor = [UIColor colorWithWhite:0.351 alpha:1.000];
+//    UIFont *font = [UIFont systemFontOfSize:13];
+//    [UIButton appearance].titleLabel.font = font;
+//    [UILabel appearance].font = font;
+//    [UITextView appearance].font = font;
+//    [UITextField appearance].font = font;
     
-    // FIXME: 默认激活配件中心，方便开发，后期需要修改滴
-    UITabBarController * tab = (UITabBarController *) _window.rootViewController;
-    [tab setSelectedIndex:2];
+    //FIXME: 启动正在开发的页面，后期请删除该段代码
+//    UITabBarController *tabs = (UITabBarController *) _window.rootViewController;
+//    tabs.selectedIndex = 2;
+    
+    // 检查是否第一次启动
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults boolForKey:sysDefaultFirstLaunchKey]){
+        [defaults setBool:YES forKey:sysDefaultFirstLaunchKey];
+        
+        // 启动欢迎页
+        WelcomeViewController *tmpVc = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
+        tmpVc.rootViewController = _window.rootViewController;
+        tmpVc.window = _window;
+        _window.rootViewController = tmpVc;
+    }
     
     return YES;
 }

@@ -10,7 +10,9 @@
 #define icar_MacroDefine_h
 
 // 默认高亮的字体颜色
-#define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.143 green:0.673 blue:0.620 alpha:1.000]
+//#define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.143 green:0.673 blue:0.620 alpha:1.000]
+#define THEME_COLOR_HIGHLIGHTED_OBJ [UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000]
+
 // 默认的字体颜色
 #define THEME_COLOR_NORMAL_OBJ [UIColor colorWithWhite:0.335 alpha:1.000]
 // 默认的导航条背景颜色

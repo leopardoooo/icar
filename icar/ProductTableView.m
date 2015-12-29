@@ -16,6 +16,8 @@
 #import "UIImageView+WebCache.h"
 #import "MacroDefine.h"
 #import "ViewUtils.h"
+#import "TipMessageView.h"
+#import "Resources.h"
 
 #define ProductViewController_LOAD_LIMIT 15
 #define ProductViewController_PAGE_INFO_FONT_SIZE 10
@@ -24,12 +26,12 @@
     UIViewController * _parent;
     Pager *_lastPage;
     UILabel * _pageInfoLabel;
+    TipMessageView *_networkErrorView;
 }
 
 @end
 
 @implementation ProductTableView
-
 
 -(instancetype)initWithFrame:(CGRect)frame parent: (UIViewController *) parent{
     if(self = [self initWithFrame:frame style:UITableViewStyleGrouped]){
@@ -44,15 +46,11 @@
         // 上拉加载更多
         MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             NSInteger newStart =  _lastPage.start + _lastPage.limit;
-            [weakSelf loadTableDataWithStart:_lastPage ? newStart : 0 done:^{
-                [weakSelf.mj_footer endRefreshing];
-            }];
+            [weakSelf loadTableDataWithStart:_lastPage ? newStart : 0];
         }];
         // 下拉重新开始刷新
         self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf loadTableDataWithStart: 0 done:^{
-                [weakSelf.mj_header endRefreshing];
-            }];
+            [weakSelf loadTableDataWithStart:0];
         }];
         
         // 设置文字
@@ -101,20 +99,26 @@
 }
 
 #pragma mark 加载数据
--(void)loadTableDataWithStart: (NSInteger) start done: (void (^)(void)) done{
+-(void)loadTableDataWithStart: (NSInteger) start{
     __unsafe_unretained __typeof(self) weakSelf = self;
     // 异步加载数据
     [ProductDataLoader queryProdList:start withLimit:ProductViewController_LOAD_LIMIT success:^(Pager *page) {
-        done();
         _lastPage = page;
         if(start == 0){
             [_dataArray removeAllObjects];
         }
         [_dataArray addObjectsFromArray: page.records];
+        _networkErrorView.hidden = YES;
+    } failure:^(NSError * error){
+        if(!_networkErrorView){
+            _networkErrorView = [TipMessageView instanceNetworkErrorView:self];
+            [_networkErrorView.reloadBtn addTarget:self action:@selector(firstLoadTableData) forControlEvents:UIControlEventTouchUpInside];
+        }
+        _networkErrorView.hidden = NO;
+        [_dataArray removeAllObjects];
+    } done:^{
+        [weakSelf.mj_header endRefreshing];
         [weakSelf reloadData];
-    } failure:^{
-        NSLog(@"网络繁忙，请稍后在试试!");
-        done();
     }];
 }
 

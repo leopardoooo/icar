@@ -12,6 +12,12 @@
 
 
 // 查询我的购物车清单
-+(void)queryMyCartWithHandler: (void (^)(NSMutableArray * data)) handler;
++(void)queryMyCart: (void (^)(NSMutableArray * data)) success
+           failure: (void (^)(NSError * error)) failure
+              done: (void (^)(void)) done;
 
+// 查询我的消息
++(void)queryMyMessage: (void (^)(NSMutableArray * data)) success
+           failure: (void (^)(NSError *)) failure
+              done: (void (^)(void)) done;
 @end

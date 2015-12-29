@@ -8,6 +8,8 @@
 
 #import "ViewUtils.h"
 #import "MacroDefine.h"
+#import "MBProgressHUD.h"
+#import "TemplateUtil.h"
 
 @implementation ViewUtils
 
@@ -74,34 +76,51 @@
 /**
  *  自动消失提示框
  */
-+(void)showMessage:(NSString *)message{
-    CGSize labelSize = [self sizeWithSingleLine:message fontSize:17];
++(void)showAnyIconMessage: (JLMessageIconType) iconType withMessage:(NSString *) message{
+    UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
     
-    UIWindow * window = [UIApplication sharedApplication].keyWindow;
-    UIView *showview =  [[UIView alloc]init];
-    showview.backgroundColor = [UIColor blackColor];
-    showview.frame = CGRectMake(1, 1, 1, 1);
-    showview.alpha = .8f;
-    showview.layer.cornerRadius = 16;
-    showview.layer.masksToBounds = YES;
-    [window addSubview:showview];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:mainWindow animated:YES];
+   
+    if(iconType == JLMessageIconTypeLoading){
+    }else{
+        NSString *imageNamed = @"";
+        switch (iconType) {
+            case JLMessageIconTypeInfo:
+            case JLMessageIconTypeWarn:
+            case JLMessageIconTypeCompleted:
+            case JLMessageIconTypeError:
+            default:
+            {
+                imageNamed = @"37x-Checkmark";
+            }
+                break;
+        }
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageNamed]];
+        hud.mode = MBProgressHUDModeCustomView;
+    }
+    hud.square = YES;
     
-    UILabel *label = [[UILabel alloc]init];
+    hud.labelText = message;
+    //hud.margin = 15.f;
+    hud.removeFromSuperViewOnHide = YES;
     
-    label.frame = CGRectMake(10, 5, labelSize.width, labelSize.height);
-    label.text = message;
-    label.textColor = [UIColor whiteColor];
-    label.textAlignment = 1;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:15];
-    [showview addSubview:label];
-    CGRect rect=[[UIScreen mainScreen] bounds];
-    showview.frame = CGRectMake((rect.size.width - labelSize.width - 20)/2, rect.size.height - 100, labelSize.width+20, labelSize.height+10);
-    [UIView animateWithDuration:2.0 animations:^{
-        showview.alpha = 0;
-    } completion:^(BOOL finished) {
-        [showview removeFromSuperview];
-    }];
+    [hud hide:YES afterDelay:2];
+}
+
+/**
+ *  自动消失提示信息
+ */
++(void)showTextMessage: (NSString *) message{
+    UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:mainWindow animated:YES];
+    hud.labelText = message;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = message;
+    hud.margin = 15.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:2];
 }
 
 @end

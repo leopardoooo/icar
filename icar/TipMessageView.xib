@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TipMessageView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rate_error_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mqr-wq-737">
+                    <rect key="frame" x="250" y="235" width="100" height="100"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请检查你的手机是否联上网 点击按钮尝试重新加载" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="dZt-Kk-3Q8">
+                    <rect key="frame" x="210" y="392" width="180" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MC-EE-4r7">
+                    <rect key="frame" x="265" y="442" width="70" height="27"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="0sz-NN-3cs"/>
+                        <constraint firstAttribute="width" constant="70" id="lpe-F2-dFC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="重新加载">
+                        <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="网络连接失败" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sF-2O-gn5">
+                    <rect key="frame" x="234" y="358" width="132" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dZt-Kk-3Q8" firstAttribute="top" secondItem="0sF-2O-gn5" secondAttribute="bottom" constant="8" id="4iW-oO-9cD"/>
+                <constraint firstAttribute="centerX" secondItem="9MC-EE-4r7" secondAttribute="centerX" id="9se-iU-vle"/>
+                <constraint firstItem="0sF-2O-gn5" firstAttribute="top" secondItem="Mqr-wq-737" secondAttribute="bottom" constant="23" id="ShW-1K-fcd"/>
+                <constraint firstItem="9MC-EE-4r7" firstAttribute="top" secondItem="dZt-Kk-3Q8" secondAttribute="bottom" constant="14" id="XJU-he-Gc8"/>
+                <constraint firstAttribute="centerX" secondItem="Mqr-wq-737" secondAttribute="centerX" id="ian-MT-UDf"/>
+                <constraint firstAttribute="centerX" secondItem="dZt-Kk-3Q8" secondAttribute="centerX" id="kYe-bX-uSR"/>
+                <constraint firstAttribute="centerY" secondItem="Mqr-wq-737" secondAttribute="centerY" constant="15" id="ndY-AJ-3ph"/>
+                <constraint firstAttribute="centerX" secondItem="0sF-2O-gn5" secondAttribute="centerX" id="xFE-1J-qN5"/>
+            </constraints>
+            <connections>
+                <outlet property="reloadBtn" destination="9MC-EE-4r7" id="OLh-Pw-pnG"/>
+                <outlet property="subTitleLabel" destination="dZt-Kk-3Q8" id="cTg-qA-kiq"/>
+                <outlet property="tipImageView" destination="Mqr-wq-737" id="jCc-jy-JYd"/>
+                <outlet property="titleLabel" destination="0sF-2O-gn5" id="iyr-hk-66a"/>
+            </connections>
+            <point key="canvasLocation" x="145" y="216"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="rate_error_icon.png" width="100" height="100"/>
+    </resources>
+</document>

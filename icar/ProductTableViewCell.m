@@ -7,12 +7,14 @@
 //
 
 #import "ProductTableViewCell.h"
+#import "MacroDefine.h"
 
 @implementation ProductTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
     self.markImageView.hidden = YES;
+    [_priceLabel setTextColor: THEME_COLOR_HIGHLIGHTED_OBJ];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -21,8 +21,6 @@
     // 复选框按钮单击事件
     _radioImageView.userInteractionEnabled = YES;
     [_radioImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didCheckBoxClick:)]];
-    _editSelectedDescLabel.font = [UIFont systemFontOfSize:10];
-    _prodPriceLabel.font = [UIFont systemFontOfSize:17];
 }
 
 #pragma mark Outlet点击事件处理
