@@ -14,10 +14,10 @@
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="F9m-Yt-xUN"/>
                 </viewController>
@@ -37,6 +37,7 @@
                     <connections>
                         <segue destination="4n9-Nt-oJw" kind="relationship" relationship="viewControllers" id="p4d-zu-t6D"/>
                         <segue destination="FDU-ZN-1lg" kind="relationship" relationship="viewControllers" id="G1J-kK-OeJ"/>
+                        <segue destination="Ivf-st-mb2" kind="relationship" relationship="viewControllers" id="ouG-cK-wpE"/>
                         <segue destination="Ezq-zq-Ytv" kind="relationship" relationship="viewControllers" id="kdu-kf-il2"/>
                         <segue destination="p8Z-Dv-foz" kind="relationship" relationship="viewControllers" id="ic8-Kh-oqY"/>
                     </connections>
@@ -155,8 +156,8 @@
                                             <constraint firstAttribute="width" constant="34" id="lZB-n0-EiJ"/>
                                             <constraint firstAttribute="height" constant="21" id="vTE-s3-ve1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdK-fC-nhm">
@@ -173,36 +174,22 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdv-3o-nJe">
-                                        <rect key="frame" x="453" y="11" width="37" height="23"/>
+                                        <rect key="frame" x="456.5" y="11" width="33.5" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="4nt-95-e93"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ2-xM-d16">
-                                        <rect key="frame" x="412" y="12" width="41" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ2-xM-d16">
+                                        <rect key="frame" x="415" y="12" width="41" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="41" id="74l-ee-AND"/>
                                             <constraint firstAttribute="height" constant="21" id="QI7-D2-E4p"/>
                                         </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="合计">
-                                                <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <font key="NSFont" size="15" name="STHeitiSC-Light"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=":">
-                                                <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <font key="NSFont" size="15" name=".HelveticaNeueDeskInterface-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMm-qF-fM1">
@@ -296,6 +283,45 @@
             </objects>
             <point key="canvasLocation" x="563" y="953"/>
         </scene>
+        <!--故障-->
+        <scene sceneID="EfL-sN-Phx">
+            <objects>
+                <navigationController id="Ivf-st-mb2" customClass="AppNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="故障" id="HAJ-bk-3yx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3ZL-6j-Hkz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="q4B-nN-8E6" kind="relationship" relationship="rootViewController" id="hmF-pD-DKh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K8H-J6-tdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1142" y="1431"/>
+        </scene>
+        <!--故障预约-->
+        <scene sceneID="YfR-6F-z0K">
+            <objects>
+                <viewController id="q4B-nN-8E6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Tb-qZ-knL"/>
+                        <viewControllerLayoutGuide type="bottom" id="9MU-7k-RLY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BNe-bg-Mm9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="故障预约" id="fQf-6k-GkU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="hJH-pg-Udz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MZ8-tz-ULo"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="33o-hw-0BL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1150" y="2201"/>
+        </scene>
         <!--我的-->
         <scene sceneID="gqK-ai-pMy">
             <objects>
@@ -313,7 +339,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3j-tg-ZNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-405" y="1675"/>
+            <point key="canvasLocation" x="-377" y="1431"/>
         </scene>
     </scenes>
     <resources>
